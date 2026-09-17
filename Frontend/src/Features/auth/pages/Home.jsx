@@ -1,0 +1,169 @@
+import React, { useState } from "react";
+import "../../../style/Home.style.scss"
+const Home = () => {
+  const [resume, setResume] = useState(null);
+  const [jobDescription, setJobDescription] = useState("");
+  const [selfDescription, setSelfDescription] = useState("");
+
+  return (
+    <main className="interview-page">
+      <div className="interview-wrapper">
+
+        <div className="interview-header">
+          <h1>
+            Create Your Custom <span>Interview Plan</span>
+          </h1>
+
+          <p>
+            Let our AI analyze the job requirements and your unique profile
+            to build a winning strategy.
+          </p>
+        </div>
+
+        <div className="interview-card">
+
+          {/* LEFT SIDE */}
+          <section className="job-panel">
+
+            <div className="panel-title">
+              <div className="title-icon">▣</div>
+
+              <h2>Target Job Description</h2>
+
+              <span>Required</span>
+            </div>
+
+            <div className="job-input-wrapper">
+              <textarea
+                value={jobDescription}
+                onChange={(e) => setJobDescription(e.target.value)}
+                placeholder={`Paste the full job description here...
+                    e.g. "Senior Frontend Engineer at Google requires
+                    proficiency in React, TypeScript and large-scale system
+                    design..."`}
+                maxLength={5000}
+              />
+
+              <small>
+                {jobDescription.length} / 5000 chars
+              </small>
+            </div>
+
+          </section>
+
+
+          {/* RIGHT SIDE */}
+          <section className="profile-panel">
+
+            <div className="panel-title profile-title">
+              <div className="title-icon">♟</div>
+
+              <h2>Your Profile</h2>
+            </div>
+
+
+            {/* RESUME */}
+            <div className="resume-area">
+
+              <label>
+                Upload Resume <em>(Best Results)</em>
+              </label>
+
+              <label
+                htmlFor="resume"
+                className="resume-drop"
+              >
+
+                <div className="upload-symbol">
+                  ↑
+                </div>
+
+                <strong>
+                  {resume
+                    ? resume.name
+                    : "Click to upload or drag & drop"}
+                </strong>
+
+                <small>
+                  PDF or DOCX (Max 5MB)
+                </small>
+
+                <input
+                  id="resume"
+                  type="file"
+                  accept=".pdf,.docx"
+                  onChange={(e) =>
+                    setResume(e.target.files[0])
+                  }
+                />
+
+              </label>
+
+            </div>
+
+
+            <div className="separator">
+              <span>OR</span>
+            </div>
+
+
+            {/* SELF DESCRIPTION */}
+            <div className="description-area">
+
+              <label htmlFor="self-description">
+                Quick Self-Description
+              </label>
+
+              <textarea
+                id="self-description"
+                value={selfDescription}
+                onChange={(e) =>
+                  setSelfDescription(e.target.value)
+                }
+                placeholder="Briefly describe your experience, key skills, and years of experience if you don't have a resume handy..."
+              />
+
+            </div>
+
+
+            {/* INFO */}
+            <div className="info-message">
+
+              <div>i</div>
+
+              <p>
+                Either a <b>Resume</b> or a{" "}
+                <b>Self Description</b> is required to generate a
+                personalized plan.
+              </p>
+
+            </div>
+
+          </section>
+
+
+          {/* FOOTER */}
+          <div className="card-footer">
+
+            <div className="generation-info">
+              AI-Powered Strategy Generation
+              <span>• Approx 30s</span>
+            </div>
+
+            <button
+              type="button"
+              className="generate-action"
+            >
+              ✨ Generate My Interview Strategy
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  );
+};
+
+export default Home;

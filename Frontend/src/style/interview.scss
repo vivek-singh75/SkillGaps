@@ -1,0 +1,1350 @@
+/* =====================================================
+   GLOBAL RESET
+===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #070b10;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.interview-report {
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  background: #070b10;
+
+  color: #edf4f7;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+
+/* =====================================================
+   MAIN GRID
+===================================================== */
+
+.report-shell {
+  width: 100%;
+  min-height: 100vh;
+
+  display: grid;
+
+  grid-template-columns:
+    250px
+    minmax(0, 1fr)
+    250px;
+
+  margin: 0;
+  padding: 0;
+
+  border: none;
+}
+
+
+/* =====================================================
+   LEFT PANEL
+===================================================== */
+
+.left-panel {
+  min-height: 100vh;
+
+  padding: 28px 18px;
+
+  border-right: 1px solid #202a32;
+
+  background: #0b1117;
+}
+
+
+/* =====================================================
+   BRAND
+===================================================== */
+
+.brand-area {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 4px 10px 25px;
+
+  border-bottom: 1px solid #202a32;
+}
+
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00c6a7,
+      #1687ff
+    );
+
+  color: white;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+.brand-area h2 {
+  margin: 0;
+
+  color: #edf4f7;
+
+  font-size: 14px;
+}
+
+
+.brand-area span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #61717d;
+
+  font-size: 7px;
+
+  letter-spacing: 1.4px;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.navigation-title {
+  margin: 27px 10px 11px;
+
+  color: #647581;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.4px;
+}
+
+
+.section-navigation {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+
+.navigation-item {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 12px 10px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #71818c;
+
+  text-align: left;
+
+  font-family: inherit;
+  font-size: 10px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.navigation-item:hover {
+  background: #111b23;
+
+  color: #b9c9d2;
+}
+
+
+.navigation-item.active {
+  background: rgba(0, 198, 167, 0.1);
+
+  color: #28d5ba;
+}
+
+
+.nav-number {
+  width: 26px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #27343d;
+
+  border-radius: 5px;
+
+  font-size: 7px;
+}
+
+
+.navigation-item.active
+.nav-number {
+  border-color: rgba(0, 198, 167, 0.4);
+
+  color: #28d5ba;
+}
+
+
+/* =====================================================
+   CENTER
+===================================================== */
+
+.content-panel {
+  min-width: 0;
+  min-height: 100vh;
+
+  padding: 32px 36px;
+
+  background: #0d141b;
+
+  overflow: hidden;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.content-heading {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+
+.section-label {
+  color: #2acbb5;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.4px;
+}
+
+
+.content-heading h1 {
+  margin: 7px 0 0;
+
+  color: #eef4f7;
+
+  font-size: 23px;
+
+  letter-spacing: -0.5px;
+}
+
+
+.question-count {
+  padding: 5px 10px;
+
+  border: 1px solid #26343e;
+
+  border-radius: 20px;
+
+  color: #7b8d98;
+
+  font-size: 8px;
+
+  white-space: nowrap;
+}
+
+
+.heading-line {
+  width: 100%;
+  height: 1px;
+
+  margin: 22px 0;
+
+  background: #202b34;
+}
+
+
+/* =====================================================
+   QUESTION LIST
+===================================================== */
+
+.questions-wrapper {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 11px;
+
+  max-height: calc(100vh - 145px);
+
+  overflow-y: auto;
+
+  padding-right: 5px;
+}
+
+
+.questions-wrapper::-webkit-scrollbar {
+  width: 4px;
+}
+
+
+.questions-wrapper::-webkit-scrollbar-thumb {
+  background: #2b3a44;
+
+  border-radius: 10px;
+}
+
+
+/* =====================================================
+   QUESTION ITEM
+===================================================== */
+
+.question-item {
+  width: 100%;
+
+  overflow: hidden;
+
+  border: 1px solid #25313a;
+
+  border-radius: 10px;
+
+  background: #111a22;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.question-item:hover {
+  border-color: #31424d;
+}
+
+
+.question-item.expanded {
+  border-color: rgba(0, 198, 167, 0.32);
+
+  background: #121d25;
+}
+
+
+/* =====================================================
+   QUESTION HEADER
+===================================================== */
+
+.question-header {
+  width: 100%;
+
+  min-height: 65px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  margin: 0;
+  padding: 14px 16px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #edf4f7;
+
+  text-align: left;
+
+  font-family: inherit;
+
+  cursor: pointer;
+}
+
+
+.question-number {
+  width: 33px;
+  height: 25px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+
+  background: rgba(22, 135, 255, 0.12);
+
+  color: #46a8ff;
+
+  font-size: 8px;
+
+  font-weight: 700;
+}
+
+
+.question-text {
+  min-width: 0;
+
+  flex: 1;
+
+  color: #e8eef2;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   DROPDOWN ICON
+===================================================== */
+
+.dropdown-icon {
+  width: 28px;
+  height: 28px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #2b3943;
+
+  border-radius: 6px;
+
+  color: #71828d;
+
+  font-size: 15px;
+
+  line-height: 1;
+
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.dropdown-icon.open {
+  transform: rotate(180deg);
+
+  border-color: rgba(0, 198, 167, 0.4);
+
+  background: rgba(0, 198, 167, 0.08);
+
+  color: #29d2b8;
+}
+
+
+/* =====================================================
+   ANSWER DROPDOWN
+===================================================== */
+
+.question-answer {
+  display: grid;
+
+  grid-template-rows: 0fr;
+
+  opacity: 0;
+
+  transition:
+    grid-template-rows 0.3s ease,
+    opacity 0.25s ease;
+}
+
+
+.question-answer.visible {
+  grid-template-rows: 1fr;
+
+  opacity: 1;
+}
+
+
+.answer-container {
+  min-height: 0;
+
+  overflow: hidden;
+
+  padding: 0 16px 0 62px;
+
+  border-top: 1px solid transparent;
+
+  transition:
+    padding 0.3s ease,
+    border-color 0.3s ease;
+}
+
+
+.question-answer.visible
+.answer-container {
+  padding-top: 17px;
+  padding-bottom: 19px;
+
+  border-top-color: #25313a;
+}
+
+
+/* =====================================================
+   ANSWER SECTIONS
+===================================================== */
+
+.answer-section {
+  margin: 0 0 18px;
+}
+
+
+.answer-section:last-child {
+  margin-bottom: 0;
+}
+
+
+.answer-label {
+  display: inline-flex;
+
+  padding: 4px 8px;
+
+  border-radius: 4px;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+.answer-label.intention {
+  background: rgba(22, 135, 255, 0.1);
+
+  color: #59b4ff;
+}
+
+
+.answer-label.model {
+  background: rgba(0, 198, 167, 0.1);
+
+  color: #36d7be;
+}
+
+
+.answer-section p {
+  margin: 8px 0 0;
+
+  color: #91a1aa;
+
+  font-size: 9px;
+
+  line-height: 1.7;
+}
+
+
+/* =====================================================
+   RIGHT PANEL
+===================================================== */
+
+.right-panel {
+  min-height: 100vh;
+
+  padding: 32px 18px;
+
+  border-left: 1px solid #202a32;
+
+  background: #0b1117;
+
+  overflow-y: auto;
+}
+
+
+/* =====================================================
+   MATCH SCORE
+===================================================== */
+
+.score-heading {
+  color: #657782;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.3px;
+}
+
+
+.score-circle {
+  width: 108px;
+  height: 108px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  margin: 16px auto 10px;
+
+  border: 3px solid #1687ff;
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 25px rgba(22, 135, 255, 0.08);
+}
+
+
+.score-circle strong {
+  color: #eef4f7;
+
+  font-size: 27px;
+}
+
+
+.score-circle span {
+  margin-top: -4px;
+
+  color: #70818c;
+
+  font-size: 9px;
+}
+
+
+.score-message {
+  color: #31cdb6;
+
+  font-size: 9px;
+
+  text-align: center;
+}
+
+
+.right-divider {
+  height: 1px;
+
+  margin: 22px 0;
+
+  background: #202b34;
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+.skills-heading {
+  color: #657782;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.3px;
+}
+
+
+.skill-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-top: 15px;
+}
+
+
+.skill-tag {
+  padding: 10px;
+
+  border: 1px solid;
+
+  border-radius: 7px;
+
+  font-size: 9px;
+
+  line-height: 1.35;
+}
+
+
+.skill-tag.low {
+  border-color: rgba(0, 198, 167, 0.2);
+
+  background: rgba(0, 198, 167, 0.08);
+
+  color: #42d8bd;
+}
+
+
+.skill-tag.medium {
+  border-color: rgba(255, 174, 66, 0.2);
+
+  background: rgba(255, 174, 66, 0.08);
+
+  color: #ffb44d;
+}
+
+
+.skill-tag.high {
+  border-color: rgba(255, 87, 87, 0.2);
+
+  background: rgba(255, 87, 87, 0.08);
+
+  color: #ff7777;
+}
+
+
+/* =====================================================
+   LAPTOP
+===================================================== */
+
+@media (max-width: 1200px) {
+
+  .report-shell {
+    grid-template-columns:
+      210px
+      minmax(0, 1fr)
+      220px;
+  }
+
+
+  .content-panel {
+    padding: 30px;
+  }
+
+
+  .right-panel {
+    padding: 30px 15px;
+  }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 950px) {
+
+  .report-shell {
+    grid-template-columns:
+      190px
+      minmax(0, 1fr);
+  }
+
+
+  .right-panel {
+    display: none;
+  }
+
+
+  .content-panel {
+    padding: 28px;
+  }
+}
+
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .report-shell {
+    display: block;
+
+    width: 100%;
+  }
+
+
+  /* LEFT PANEL BECOMES TOP BAR */
+
+  .left-panel {
+    width: 100%;
+    min-height: auto;
+
+    padding: 15px;
+
+    border-right: none;
+
+    border-bottom: 1px solid #202a32;
+  }
+
+
+  .brand-area {
+    padding: 0 3px 13px;
+  }
+
+
+  .navigation-title {
+    display: none;
+  }
+
+
+  .section-navigation {
+    flex-direction: row;
+
+    gap: 7px;
+
+    margin-top: 12px;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+  }
+
+
+  .section-navigation::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  .navigation-item {
+    width: auto;
+
+    min-width: 155px;
+
+    flex-shrink: 0;
+  }
+
+
+  .content-panel {
+    width: 100%;
+
+    min-height: calc(100vh - 95px);
+
+    padding: 25px 20px;
+
+    overflow: visible;
+  }
+
+
+  .questions-wrapper {
+    max-height: none;
+
+    overflow: visible;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 500px) {
+
+  .left-panel {
+    padding: 12px;
+  }
+
+
+  .content-panel {
+    padding: 22px 14px;
+  }
+
+
+  .content-heading {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+
+  .content-heading h1 {
+    font-size: 20px;
+  }
+
+
+  .question-count {
+    font-size: 7px;
+  }
+
+
+  .heading-line {
+    margin: 19px 0;
+  }
+
+
+  .question-header {
+    min-height: 62px;
+
+    gap: 9px;
+
+    padding: 12px;
+  }
+
+
+  .question-number {
+    width: 30px;
+    height: 24px;
+  }
+
+
+  .question-text {
+    font-size: 10px;
+
+    line-height: 1.5;
+  }
+
+
+  .dropdown-icon {
+    width: 25px;
+    height: 25px;
+
+    font-size: 13px;
+  }
+
+
+  .answer-container {
+    padding-left: 51px;
+  }
+
+
+  .question-answer.visible
+  .answer-container {
+    padding-top: 14px;
+    padding-bottom: 16px;
+  }
+
+
+  .answer-section p {
+    font-size: 8.5px;
+
+    line-height: 1.65;
+  }
+
+
+  .navigation-item {
+    min-width: 145px;
+
+    padding: 10px 8px;
+
+    font-size: 8px;
+  }
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 360px) {
+
+  .content-panel {
+    padding: 20px 10px;
+  }
+
+
+  .question-header {
+    padding: 10px;
+
+    gap: 7px;
+  }
+
+
+  .question-number {
+    width: 27px;
+    height: 23px;
+
+    font-size: 7px;
+  }
+
+
+  .question-text {
+    font-size: 9px;
+  }
+
+
+  .dropdown-icon {
+    width: 23px;
+    height: 23px;
+  }
+
+
+  .answer-container {
+    padding-left: 44px;
+  }
+}
+
+
+
+
+
+/* =====================================================
+   PREPARATION ROADMAP
+===================================================== */
+
+.roadmap-wrapper {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  margin: 0;
+  padding: 0;
+
+  position: relative;
+}
+
+
+/* =====================================================
+   ROADMAP ITEM
+===================================================== */
+
+.roadmap-item {
+  position: relative;
+
+  display: flex;
+
+  gap: 18px;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0 0 30px;
+}
+
+
+/* =====================================================
+   ROADMAP VERTICAL LINE
+===================================================== */
+
+.roadmap-item::before {
+  content: "";
+
+  position: absolute;
+
+  top: 34px;
+  bottom: 0;
+
+  left: 17px;
+
+  width: 1px;
+
+  background: #263740;
+}
+
+
+/* Don't show line after final item */
+
+.roadmap-item:last-child {
+  padding-bottom: 0;
+}
+
+.roadmap-item:last-child::before {
+  display: none;
+}
+
+
+/* =====================================================
+   DAY MARKER
+===================================================== */
+
+.roadmap-marker {
+  width: 35px;
+  height: 35px;
+
+  flex-shrink: 0;
+
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #1687ff;
+
+  border-radius: 50%;
+
+  background: #0d141b;
+
+  color: #46a8ff;
+
+  font-size: 8px;
+
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   ROADMAP CONTENT
+===================================================== */
+
+.roadmap-details {
+  min-width: 0;
+
+  flex: 1;
+
+  padding-top: 2px;
+}
+
+
+.roadmap-details > span {
+  display: inline-flex;
+
+  padding: 4px 8px;
+
+  border-radius: 4px;
+
+  background: rgba(0, 198, 167, 0.1);
+
+  color: #2acbb5;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.7px;
+}
+
+
+.roadmap-details h2 {
+  margin: 8px 0 10px;
+
+  color: #e8eef2;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+}
+
+
+/* =====================================================
+   TASK LIST
+===================================================== */
+
+.roadmap-details ul {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  margin: 0;
+  padding: 0 0 0 18px;
+}
+
+
+.roadmap-details li {
+  color: #8797a1;
+
+  font-size: 9px;
+
+  line-height: 1.6;
+}
+
+
+.roadmap-details li::marker {
+  color: #1687ff;
+}
+
+
+/* =====================================================
+   ROADMAP HOVER
+===================================================== */
+
+.roadmap-item:hover
+.roadmap-marker {
+  border-color: #2acbb5;
+
+  color: #2acbb5;
+
+  box-shadow:
+    0 0 14px rgba(0, 198, 167, 0.12);
+}
+
+
+.roadmap-item:hover
+.roadmap-details h2 {
+  color: #f1f6f8;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 950px) {
+
+  .roadmap-item {
+    gap: 16px;
+
+    padding-bottom: 28px;
+  }
+
+
+  .roadmap-marker {
+    width: 34px;
+    height: 34px;
+  }
+
+
+  .roadmap-item::before {
+    left: 16px;
+
+    top: 34px;
+  }
+
+
+  .roadmap-details h2 {
+    font-size: 13px;
+  }
+
+
+  .roadmap-details li {
+    font-size: 9px;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .roadmap-item {
+    gap: 12px;
+
+    padding-bottom: 24px;
+  }
+
+
+  .roadmap-marker {
+    width: 31px;
+    height: 31px;
+
+    font-size: 7px;
+  }
+
+
+  .roadmap-item::before {
+    left: 15px;
+
+    top: 31px;
+  }
+
+
+  .roadmap-details {
+    padding-top: 1px;
+  }
+
+
+  .roadmap-details > span {
+    padding: 3px 7px;
+
+    font-size: 6px;
+  }
+
+
+  .roadmap-details h2 {
+    margin: 7px 0 8px;
+
+    font-size: 11px;
+  }
+
+
+  .roadmap-details ul {
+    gap: 6px;
+
+    padding-left: 15px;
+  }
+
+
+  .roadmap-details li {
+    font-size: 8.5px;
+
+    line-height: 1.55;
+  }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .roadmap-item {
+    gap: 10px;
+
+    padding-bottom: 21px;
+  }
+
+
+  .roadmap-marker {
+    width: 28px;
+    height: 28px;
+
+    font-size: 6.5px;
+  }
+
+
+  .roadmap-item::before {
+    left: 13.5px;
+
+    top: 28px;
+  }
+
+
+  .roadmap-details h2 {
+    font-size: 10px;
+  }
+
+
+  .roadmap-details li {
+    font-size: 8px;
+  }
+}
