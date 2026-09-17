@@ -3,11 +3,10 @@ const config = require("./src/config/config")
 const app = require("./src/app");
 const connectDB = require("./src/DB/db")
 
-
 connectDB()
 
 
-const PORT =  config.PORT || 4000
+const PORT =  config.PORT 
 
 
 app.listen(PORT , ()=>{

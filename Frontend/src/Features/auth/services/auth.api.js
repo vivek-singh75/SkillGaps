@@ -48,12 +48,22 @@ export async function logout() {
 
 export async function getMe() {
     try {
+
         const response = await api.get('/api/auth/getMe');
 
-        return response.data
+        if (response.data) {
+            return response.data;
+        }
+
+        return null;
 
     } catch (error) {
-        console.log(`error in frontend getM api call ${error}`)
+
+        console.error(
+            "error in frontend getMe api call:",
+            error
+        );
+
+        throw error;
     }
 }
-

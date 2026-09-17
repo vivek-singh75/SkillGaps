@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { AuthContext } from "../services/auth.contex";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../services/auth.context";
 import { register, login , logout , getMe } from "../services/auth.api";
 
 export  const useAuth = ()=>{
@@ -29,8 +29,28 @@ export  const useAuth = ()=>{
         } finally{
             setLoading(false)
         }
-    
     }
+
+    
+    useEffect(() => {
+        const getUserAndSet = async () => {
+            try {
+                const data = await getMe();
+                if (data?.user) {
+                    setUser(data.user);
+                } else {
+                    setUser(null);
+                }
+            } catch (error) {
+                setUser(null);
+                console.log("user token is not available");
+            } finally {
+                setLoading(false);
+            }
+        };
+        getUserAndSet();
+}, []);
+
 
     const handleLogout = async () =>{
         setLoading(true)
