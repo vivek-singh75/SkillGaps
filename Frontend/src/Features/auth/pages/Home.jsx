@@ -1,10 +1,33 @@
-import React, { useState } from "react";
+import React, { useState , useRef,  } from "react";
 import "../../../style/Home.style.scss";
+import { useInterview } from "../hooks/useInterview.js"
+import { useNavigate } from 'react-router-dom';   
 
 const Home = () => {
-  const [resume, setResume] = useState(null);
+
+  const { loading ,  generateReport } = useInterview();
+
+  const navigate = useNavigate()
+
+
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
+  const resume = useRef();
+
+
+  const handleInterviewReports = async ()=>{
+    const resumeFile = resume.current.files[0]
+    const data = await generateReport({jobDescription , selfDescription , resumeFile});
+
+    navigate(`/interview/${ data._id }`) 
+  }
+
+  if(loading){
+    <main>
+      <h1>Loading Your Report</h1>
+    </main>
+  }
+
 
   return (
     <main className="interview-page">
@@ -93,9 +116,7 @@ const Home = () => {
                   id="resume"
                   type="file"
                   accept=".pdf,.docx"
-                  onChange={(e) =>
-                    setResume(e.target.files[0])
-                  }
+                  ref= {resume}
                 />
 
               </label>
@@ -154,6 +175,7 @@ const Home = () => {
             <button
               type="button"
               className="generate-action"
+              onClick={handleInterviewReports}
             >
               ✨ Generate My Interview Strategy
             </button>

@@ -132,6 +132,9 @@ matchScore
 
 Give a number between 0 and 100.
 
+title 
+job title is should be showed , 
+
 Do not add any extra fields.
 `;
 

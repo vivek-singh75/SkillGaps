@@ -39,6 +39,8 @@ const preparationPlanSchema = z.object({
 const interviewReportSchema = z.object({
   matchScore: z.number().min(0).max(100),
 
+  title : z.string(),
+
   technicalQuestion: z.array(
     technicalQuestionSchema
   ),
@@ -61,6 +63,10 @@ const interviewReportJsonSchema = {
   type: "object",
 
   properties: {
+    title :{
+      type: "string",
+      
+    },
     matchScore: {
       type: "number",
       minimum: 0,
@@ -162,6 +168,7 @@ const interviewReportJsonSchema = {
 
   required: [
     "matchScore",
+    "title",
     "technicalQuestion",
     "behavioralQuestion",
     "skillGap",

@@ -1,7 +1,5 @@
 const { PDFParse } = require("pdf-parse");
-
 const { generateInterviewReport } = require("../services/ai.services");
-
 const interviewReportModel = require("../models/interviewReport.model");
 
 
@@ -24,7 +22,7 @@ await parser.destroy();
         resume : resumeContent,
         selfDescription,
         jobDescription
-    })
+    }) 
 
     const interviewReport = await interviewReportModel.create({
         user : req.user.userId,
@@ -44,4 +42,39 @@ await parser.destroy();
 
 }
 
-module.exports= { interviewController, }
+async function getInterviewReportById(req , res) {
+    const interviewId = req.params
+
+    const interviewReport = await interviewReportModel.findOne({_id: interviewId , user : req.user.userId});
+
+    if(!interviewReport){
+        return res.status(409).json({
+            message : "no interview report found "
+        });
+    }
+
+    res.status(200).json({
+        message : "interview report fetched",
+        interviewReport
+    });
+} 
+
+ 
+async function getAllInterviewReportBy(req ,res) {
+    const interviewReport = await interviewReportModel.find({user: req.user.userId})
+    .sort({createdAt: -1}).select("-resume  - selfDescription  jobDescription _v -technicalQuestion -behavioralQuestion skillsGap -preparationPlan "  )
+ 
+    res.status(200).json({
+        message : "interview report fetched succesfully",
+        interviewReport
+    })
+}
+
+
+
+module.exports= { 
+    interviewController, 
+    getInterviewReportById,
+    getAllInterviewReportBy
+
+}
