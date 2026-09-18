@@ -43,7 +43,7 @@ await parser.destroy();
 }
 
 async function getInterviewReportById(req , res) {
-    const interviewId = req.params
+    const {interviewId} = req.params
 
     const interviewReport = await interviewReportModel.findOne({_id: interviewId , user : req.user.userId});
 

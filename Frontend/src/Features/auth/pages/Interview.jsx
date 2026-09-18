@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import "../../../style/interview.scss";
 import {useInterview} from "../hooks/useInterview.js"
-
+import { useParams } from "react-router-dom";
 
 const InterviewReport = () => {
   const [activeSection, setActiveSection] = useState("technical");
   const [expandedQuestion, setExpandedQuestion] = useState(null);
+  const {interviewId} = useParams()
 
   //   report = {
   //   matchScore: 85,
@@ -128,7 +129,18 @@ const InterviewReport = () => {
   //   ],
   // };
   
-  const {report} = useInterview()
+  const {report ,getReportById} = useInterview()
+
+  
+  useEffect(()=>{
+    if(interviewId){
+      getReportById(interviewId)
+    }
+
+  },[interviewId])
+
+
+
 
 
   const toggleQuestion = (id) => {

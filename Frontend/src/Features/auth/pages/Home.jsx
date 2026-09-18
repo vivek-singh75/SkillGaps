@@ -1,14 +1,14 @@
-import React, { useState , useRef,  } from "react";
+import React, { useState , useRef, useEffect } from "react";
 import "../../../style/Home.style.scss";
 import { useInterview } from "../hooks/useInterview.js"
 import { useNavigate } from 'react-router-dom';   
+import { useParams } from "react-router-dom";
 
 const Home = () => {
 
-  const { loading ,  generateReport } = useInterview();
+  const { loading ,  generateReport ,getReportById} = useInterview();
 
   const navigate = useNavigate()
-
 
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
@@ -22,10 +22,10 @@ const Home = () => {
     navigate(`/interview/${ data._id }`) 
   }
 
-  if(loading){
-    <main>
-      <h1>Loading Your Report</h1>
-    </main>
+  if(loading ){
+    return <main>
+            <h1>Loading Your Report</h1>
+          </main>
   }
 
 

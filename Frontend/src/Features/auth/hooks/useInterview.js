@@ -17,9 +17,7 @@ export const useInterview =  () => {
             setLoading(true);
 
             const response = await generateInterviewReport(data);
-
             const interviewReport = response.interviewReport;
-
             const reportData = {
                 _id: interviewReport._id,
                 matchScore: interviewReport.matchScore,
@@ -30,9 +28,7 @@ export const useInterview =  () => {
             };
 
             setReport(reportData);
-
             return reportData;
-
         } catch (error) {
             console.error("Generate interview report error:", error);
             throw error;
@@ -43,12 +39,23 @@ export const useInterview =  () => {
     };
 
     const getReportById = async (interviewId) =>{
-        setLoading(true)
-
-        try {
+        try{
+            setLoading(true)
             const response = await getInterviewReportById(interviewId)
 
-            setReport(response.interviewReport)
+            const interviewReport = response.interviewReport;
+                const reportData = {
+                    _id: interviewReport._id,
+                    matchScore: interviewReport.matchScore,
+                    technicalQuestion: interviewReport.technicalQuestion,
+                    behavioralQuestion: interviewReport.behavioralQuestion,
+                    skillGap: interviewReport.skillGap,
+                    preparationPlan: interviewReport.preparationPlan
+            };
+
+            setReport(reportData);
+
+            return reportData;
         } catch (error) {
             console.log(error)
         } finally {
@@ -58,6 +65,7 @@ export const useInterview =  () => {
 
     const getReports = async (interviewId)=>{
         setLoading(true)
+        let response = null
 
         try {
             const response = await getAllInterviewReport(interviewId);
@@ -68,6 +76,10 @@ export const useInterview =  () => {
         }  finally {
             setLoading(true)
         }
+        return response.interviewReport
+
     }
+
+
     return {loading , report, reports ,generateReport , getReportById , getReports}
 }
