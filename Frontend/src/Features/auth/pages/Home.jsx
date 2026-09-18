@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../../../style/Home.style.scss"
+import "../../../style/Home.style.scss";
+
 const Home = () => {
   const [resume, setResume] = useState(null);
   const [jobDescription, setJobDescription] = useState("");
