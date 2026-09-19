@@ -1348,3 +1348,115 @@ body {
     font-size: 8px;
   }
 }
+
+
+.main-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.question-count {
+    padding: 7px 12px;
+    border: 1px solid #26313d;
+    border-radius: 20px;
+    color: #7f8b98;
+    font-size: 11px;
+}
+
+@media (max-width: 450px) {
+
+    .generate-resume-btn {
+        padding: 8px;
+        font-size: 0;
+    }
+
+    .generate-resume-btn span {
+        font-size: 14px;
+    }
+}
+
+.sidebar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+.generate-resume-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 14px;
+
+    border: 1px solid rgba(139, 92, 246, 0.45);
+    border-radius: 8px;
+
+    background: rgba(139, 92, 246, 0.1);
+    color: #c4b5fd;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    &:hover {
+        background: rgba(139, 92, 246, 0.18);
+        border-color: #8b5cf6;
+    }
+}
+
+
+.brand-area {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Logo */
+.brand-area .brand-icon {
+    flex-shrink: 0;
+}
+
+/* Brand text */
+.brand-area .brand-icon + div {
+    flex: 1;
+}
+
+/* Button */
+.brand-area .generate-resume-btn {
+    flex-basis: 100%;
+    width: fit-content;
+    margin: 4px 0 0 0;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .brand-area {
+        flex-wrap: nowrap;
+        gap: 8px;
+    }
+
+    .brand-area .brand-icon + div {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .brand-area .generate-resume-btn {
+        flex-basis: auto;
+        width: auto;
+        flex-shrink: 0;
+        margin: 0 0 0 auto;
+    }
+}
+
+
+

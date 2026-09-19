@@ -1,4 +1,5 @@
 const { GoogleGenAI } = require("@google/genai");
+const puppeteer = require("puppeteer")
 
 const config = require("../config/config");
 
@@ -194,6 +195,125 @@ Do not add any extra fields.
 }
 
 
+async function generateTargetedResume({
+    resume,
+    jobDescription,
+    selfDescription
+}) {
+
+    let browser;
+
+    try {
+
+        const userDetails = userDetailsToText({
+            resume,
+            jobDescription,
+            selfDescription
+        });
+
+
+        const prompt = `
+You are an expert ATS resume writer.
+
+Create a professional job-targeted resume in HTML.
+
+Use the candidate's existing resume, self description and job description below.
+
+Rules:
+- Use only the provided information.
+- Do not invent any skills, experience, projects, education or achievements.
+- Target the resume toward the job description.
+- Prioritize relevant skills and experience.
+- Improve wording and make it ATS-friendly.
+- Return only HTML.
+- Start with <div class="resume"> and end with </div>.
+- Do not return Markdown or explanations.
+
+Candidate Information:
+
+${userDetails}
+`;
+
+        // Gemini generates HTML
+        const response = await ai.models.generateContent({
+
+            model: "gemini-3.5-flash-lite",
+
+            contents: prompt,
+
+            config: {
+                responseMimeType: "text/plain"
+            }
+
+        });
+
+
+        let resumeHTML = response.text.trim();
+
+
+        // Remove markdown fences if Gemini adds them
+        resumeHTML = resumeHTML
+            .replace(/^```html\s*/i, "")
+            .replace(/\s*```$/i, "")
+            .trim();
+
+
+        // Generate PDF
+        browser = await puppeteer.launch({
+            headless: true
+        });
+
+
+        const page = await browser.newPage();
+
+
+        await page.setContent(resumeHTML, {
+            waitUntil: "networkidle0"
+        });
+
+
+        const pdfBuffer = await page.pdf({
+
+            format: "A4",
+
+            printBackground: true,
+
+            margin: {
+                top: "10mm",
+                bottom: "10mm",
+                left: "10mm",
+                right: "10mm"
+            }
+
+        });
+
+
+        return {
+            resumeHTML,
+            pdfBuffer
+        };
+
+
+    } catch (error) {
+
+        console.error(
+            "Error in generateTargetedResume:",
+            error
+        );
+
+        throw error;
+
+    } finally {
+
+        if (browser) {
+            await browser.close();
+        }
+
+    }
+
+}
+
 module.exports = {
-  generateInterviewReport
+  generateInterviewReport,
+  generateTargetedResume
 };

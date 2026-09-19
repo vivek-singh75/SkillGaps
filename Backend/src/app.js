@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const authRoute = require("../src/routes/auth.route");
 const interviewRouter = require("../src/routes/interview.route");
+const resumeRouter = require("../src/routes/resume.route");
  
 
 app.use(express.json());
@@ -18,6 +19,8 @@ app.use(cors({
 app.use("/api/auth" , authRoute);
 
 app.use("/api/interviewReport" ,  interviewRouter);
+
+app.use("/api/resume" , resumeRouter)
 
 
 module.exports = app

@@ -2,12 +2,14 @@ import React, { useState , useEffect} from "react";
 import "../../../style/interview.scss";
 import {useInterview} from "../hooks/useInterview.js"
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const InterviewReport = () => {
   const [activeSection, setActiveSection] = useState("technical");
   const [expandedQuestion, setExpandedQuestion] = useState(null);
   const {interviewId} = useParams()
 
+  const navigate = useNavigate()
   //   report = {
   //   matchScore: 85,
 
@@ -252,7 +254,16 @@ const InterviewReport = () => {
               <h2>SkillGaps</h2>
               <span>AI INTERVIEW</span>
             </div>
+          <button
+              className="generate-resume-btn"
+              onClick={() => navigate("/resume/download")}
+          >
+              <span className="resume-btn-icon">✦</span>
+              Generate Resume
+          </button>
+
           </div>
+
 
 
           <div className="navigation-title">
@@ -354,6 +365,7 @@ const InterviewReport = () => {
                   {" "}
                   questions
                 </span>
+                
               </>
             )}
 
