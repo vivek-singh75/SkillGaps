@@ -1,26 +1,28 @@
 const express = require("express");
-const cookieParser = require("cookie-parser"); 
-const app = express();
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
+
+const app = express();
 
 const authRoute = require("../src/routes/auth.route");
 const interviewRouter = require("../src/routes/interview.route");
 const resumeRouter = require("../src/routes/resume.route");
- 
 
 app.use(express.json());
 app.use(cookieParser());
 
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://vivek-singh75.github.io"
+];
+
 app.use(cors({
-    origin: "http://localhost:5173",
-    credentials : true
+    origin: allowedOrigins,
+    credentials: true
 }));
 
-app.use("/api/auth" , authRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/interviewReport", interviewRouter);
+app.use("/api/resume", resumeRouter);
 
-app.use("/api/interviewReport" ,  interviewRouter);
-
-app.use("/api/resume" , resumeRouter)
-
-
-module.exports = app
+module.exports = app;
