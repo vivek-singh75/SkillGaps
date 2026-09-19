@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { generateTargetedResume } from "../services/resume.api";
-import "../../../style/ResumeGenerator.scss";
+import "../../../style/resumeGenerator.scss";
 
 const ResumeGenerator = () => {
 
