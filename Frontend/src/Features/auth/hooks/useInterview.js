@@ -1,4 +1,4 @@
-import {getAllInterviewReport ,getInterviewReportById , generateInterviewReport} from "../services/Interview.api"
+import {generateInterviewReport ,getInterviewReportById , getAllInterviewReports} from "../services/Interview.api"
 import { useContext } from "react"
 import { InterviewContext } from "../../interview/Interview.context.jsx"
 
@@ -39,9 +39,11 @@ export const useInterview =  () => {
     };
 
     const getReportById = async (interviewId) =>{
+
+        let response = null
         try{
             setLoading(true)
-            const response = await getInterviewReportById(interviewId)
+            response = await getInterviewReportById(interviewId)
 
             const interviewReport = response.interviewReport;
                 const reportData = {
@@ -63,23 +65,32 @@ export const useInterview =  () => {
         }
     }
 
-    const getReports = async (interviewId)=>{
-        setLoading(true)
-        let response = null
+    const getReports = async () => {
+        setLoading(true);
 
         try {
-            const response = await getAllInterviewReport(interviewId);
+            const response = await getAllInterviewReports();
 
-            setReports(response.interviewReport)
+            const interviewReports = response.interviewReport;
+
+            const reportData = interviewReports.map((report) => ({
+                _id: report._id,
+                matchScore: report.matchScore,
+                title: report.title,
+                user: report.user,
+                createdAt: report.createdAt
+            }));
+
+            setReports(reportData);
+
+            return reportData;
+
         } catch (error) {
-            console.log(error)
-        }  finally {
-            setLoading(true)
+            console.log(`error in getReports ${error}`);
+        } finally {
+            setLoading(false);
         }
-        return response.interviewReport
-
-    }
-
+    };
 
     return {loading , report, reports ,generateReport , getReportById , getReports}
 }

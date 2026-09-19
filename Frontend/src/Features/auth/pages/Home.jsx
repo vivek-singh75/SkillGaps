@@ -2,32 +2,61 @@ import React, { useState , useRef, useEffect } from "react";
 import "../../../style/Home.style.scss";
 import { useInterview } from "../hooks/useInterview.js"
 import { useNavigate } from 'react-router-dom';   
-import { useParams } from "react-router-dom";
+
+
 
 const Home = () => {
 
-  const { loading ,  generateReport ,getReportById} = useInterview();
+  const { loading , reports,  generateReport ,getReportById , getReports} = useInterview();
 
   const navigate = useNavigate()
 
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
+  const [allData, setAllData] = useState([])
   const resume = useRef();
 
 
   const handleInterviewReports = async ()=>{
     const resumeFile = resume.current.files[0]
-    const data = await generateReport({jobDescription , selfDescription , resumeFile});
+    try {
+      const data = await generateReport({jobDescription , selfDescription , resumeFile});
 
-    navigate(`/interview/${ data._id }`) 
+      navigate(`/interview/${ data._id }`) 
+
+    } catch (error) {
+
+      return <main><h2>Failed ,  Try Again </h2></main>
+    }
   }
+
+ useEffect(()=>{
+    const showRecentReports = async () =>{
+      try {
+        const data = await getReports();
+        setAllData(data)
+           
+      } catch (error) {
+        console.log(`Error while fetching all data ${error}`)
+      }
+    }
+    showRecentReports()
+
+
+  } , [])
+  
+
 
   if(loading ){
     return <main>
-            <h1>Loading Your Report</h1>
+            <h1>Loading Your Report...</h1>
           </main>
   }
 
+ 
+ 
+
+  
 
   return (
     <main className="interview-page">
@@ -183,6 +212,21 @@ const Home = () => {
           </div>
 
         </div>
+        <footer className="recent-report">
+          <h2 className="recent-heading">My Recent interview Plans</h2>
+            <div className="report-card">
+              {
+                allData.map((report)=>(
+                  <button key={report._id}>
+                    <h2>{report.title}</h2>
+                    <p>Generation time{" "}
+                    {new Date(report.createdAt).toLocaleDateString()}</p>
+                    <h3>Match Score <span>{report.matchScore}%</span></h3>
+                  </button>
+                ))}   
+                 
+            </div>
+        </footer>
 
       </div>
     </main>

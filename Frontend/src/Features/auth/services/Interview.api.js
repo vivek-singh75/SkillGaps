@@ -27,8 +27,8 @@ export const getInterviewReportById =async (interviewId) =>{
     return response.data
 }
 
-export const getAllInterviewReport =async ()=>{
-    const response =await api.get("/api/interview")
+export const getAllInterviewReports =async ()=>{
+    const response =await api.get("/api/interviewReport/")
 
     return response.data
 }

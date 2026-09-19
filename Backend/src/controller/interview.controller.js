@@ -61,9 +61,12 @@ async function getInterviewReportById(req , res) {
 
  
 async function getAllInterviewReportBy(req ,res) {
-    const interviewReport = await interviewReportModel.find({user: req.user.userId})
-    .sort({createdAt: -1}).select("-resume  - selfDescription  jobDescription _v -technicalQuestion -behavioralQuestion skillsGap -preparationPlan "  )
- 
+    const interviewReport = await interviewReportModel
+    .find({ user: req.user.userId })
+    .sort({ createdAt: -1 })
+    .select("-resume -selfDescription -jobDescription -__v -technicalQuestion -behavioralQuestion -skillGap -preparationPlan");
+
+    
     res.status(200).json({
         message : "interview report fetched succesfully",
         interviewReport

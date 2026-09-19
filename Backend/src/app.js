@@ -1,11 +1,11 @@
 const express = require("express");
-const cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser"); 
 const app = express();
 const cors = require("cors");
 
 const authRoute = require("../src/routes/auth.route");
 const interviewRouter = require("../src/routes/interview.route");
-
+ 
 
 app.use(express.json());
 app.use(cookieParser());
