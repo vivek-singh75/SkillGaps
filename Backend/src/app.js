@@ -10,14 +10,8 @@ const resumeRouter = require("../src/routes/resume.route");
 
 app.use(express.json());
 app.use(cookieParser());
-
-const allowedOrigins = [
-   // "http://localhost:5173",
-    "https://vivek-singh75.github.io"
-];
-
 app.use(cors({
-    origin: allowedOrigins,
+    origin: "https://vivek-singh75.github.io",
     credentials: true
 }));
 
