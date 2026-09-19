@@ -46,16 +46,11 @@ const Home = () => {
   } , [])
   
 
-
   if(loading ){
     return <main>
             <h1>Loading Your Report...</h1>
           </main>
   }
-
- 
- 
-
   
 
   return (

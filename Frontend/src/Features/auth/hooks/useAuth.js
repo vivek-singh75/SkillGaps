@@ -1,19 +1,24 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../services/auth.context";
 import { register, login , logout , getMe } from "../services/auth.api";
+import { useNavigate } from "react-router-dom";
 
 export  const useAuth = ()=>{
     const context = useContext(AuthContext)
     const {user , setUser , loading , setLoading} = context
+    const navigate = useNavigate()
 
     const handleLogin =async ({email , password})=>{
+
         setLoading(true);
+
         try {
-            const data = await login(email ,password);
+            const data = await login(email , password);
             setUser(data.user)
            
         } catch (error) {
-            
+            console.log(`login error ${error}`)
+
         } finally{
             setLoading(false)
         } 
@@ -36,22 +41,26 @@ export  const useAuth = ()=>{
         const getUserAndSet = async () => {
             try {
                 const data = await getMe();
+
                 if (data?.user) {
                     setUser(data.user);
                 } else {
                     setUser(null);
                 }
+
             } catch (error) {
+                console.error("Unexpected error while checking user:", error);
                 setUser(null);
-                console.log("user token is not available");
+
             } finally {
                 setLoading(false);
             }
         };
+
         getUserAndSet();
-}, []);
+    }, []);
 
-
+    
     const handleLogout = async () =>{
         setLoading(true)
         try {

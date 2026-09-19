@@ -53,8 +53,8 @@ async function registerUserController(req , res) {
 }
  
 
-
 async function loginController(req , res) {
+
     const {email , password} = req.body;
 
     const user = await userModel.findOne({email});
@@ -62,12 +62,13 @@ async function loginController(req , res) {
     if(!user){
         return res.status(402).json({message : "user not exist"});
     }
-
+    
     const isPasswordValid = await bcrypt.compare(password , user.password);
     
     if(!isPasswordValid){
         return res.status(409).json({message : "password is inValid"})
     }
+
     const token = jwt.sign({
         userId : user._id
     }, config.JWT_KEY, 
@@ -89,7 +90,6 @@ async function loginController(req , res) {
 }
 
 
-
 async function logoutController(req , res) {
     const token  = req.headers.cookie;
 
@@ -100,6 +100,7 @@ async function logoutController(req , res) {
             
         })
     }
+
     if(token){
         await tokenBlackListModel.create({token})
     }
@@ -113,18 +114,52 @@ async function logoutController(req , res) {
 }
 
 
-async function getMe(req ,res) {
+async function getMe(req, res) {
+    try {
+        const token = req.cookies?.token;
 
-    const user  = await userModel.findById(req.user.userId);
-
-    res.status(202).json({
-        message : "user data is fetched ",
-        user: {
-            id : user._id,
-            username : user.username,
-            email : user.email
+        // No token = not logged in
+        if (!token) {
+            return res.status(200).json({
+                user: null
+            });
         }
-    });
+
+        // Check blacklist
+        const isBlacklisted = await tokenBlackListModel.findOne({
+            token
+        });
+
+        if (isBlacklisted) {
+            return res.status(200).json({
+                user: null
+            });
+        }
+
+        // Verify token
+        const decoded = jwt.verify(token, config.JWT_KEY);
+
+        // Find user
+        const user = await userModel.findById(decoded.userId)
+            .select("-password");
+
+        if (!user) {
+            return res.status(200).json({
+                user: null
+            });
+        }
+
+        return res.status(200).json({
+            user
+        });
+
+    } catch (error) {
+
+        // Expired / invalid token
+        return res.status(200).json({
+            user: null
+        });
+    }
 }
 
 module.exports = {

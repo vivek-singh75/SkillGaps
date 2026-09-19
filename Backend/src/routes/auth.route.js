@@ -12,7 +12,7 @@ router.post("/login" , authController.loginController);
 
 router.get("/logout" , authController.logoutController);
 
-router.get("/getMe" , authMiddleware.authUser,   authController.getMe);
+router.get("/getMe" ,  authController.getMe);
 
 
 module.exports = router;

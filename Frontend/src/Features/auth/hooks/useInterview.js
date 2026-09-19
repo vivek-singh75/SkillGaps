@@ -17,7 +17,9 @@ export const useInterview =  () => {
             setLoading(true);
 
             const response = await generateInterviewReport(data);
+
             const interviewReport = response.interviewReport;
+            
             const reportData = {
                 _id: interviewReport._id,
                 matchScore: interviewReport.matchScore,

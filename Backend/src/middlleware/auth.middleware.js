@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 const tokenBlackListModel  = require("../models/blacklist.model");
+const config = require("../config/config")
 
 async function authUser(req , res , next) {
     const token =  req.cookies.token;
 
     if(!token){
-        return res.status(409).json({
+        return res.status(401).json({
             message : "token is not availble"
         });
     }
@@ -26,7 +27,7 @@ async function authUser(req , res , next) {
 
     } catch (error) {
         console.log(`error in authMiddleware ${error}`)
-        return res.status(409).json({
+        return res.status(401).json({
             message : "error in middleware"
         });
     }

@@ -5,6 +5,7 @@ const api = axios.create({
     withCredentials: true
 })
 
+
 export async function register(username ,email ,  password) {
     try {
         const response  = await api.post('/api/auth/register',
@@ -45,25 +46,13 @@ export async function logout() {
     }
 }
 
-
 export async function getMe() {
     try {
+        const response = await api.get("/api/auth/getMe");
 
-        const response = await api.get('/api/auth/getMe');
-
-        if (response.data) {
-            return response.data;
-        }
-
-        return null;
+        return response.data;
 
     } catch (error) {
-
-        console.error(
-            "error in frontend getMe api call:",
-            error
-        );
-
         throw error;
     }
 }
