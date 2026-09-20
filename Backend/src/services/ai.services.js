@@ -1,6 +1,5 @@
 const { GoogleGenAI } = require("@google/genai");
 const puppeteer = require("puppeteer")
-
 const config = require("../config/config");
 
 const {
