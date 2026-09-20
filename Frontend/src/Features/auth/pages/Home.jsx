@@ -49,7 +49,8 @@ const Home = () => {
     const showRecentReport  = async ()=>{
     try {
       const data  = reports
-      navigate(`/interview/${ data._id }`) 
+      console.log(data)
+    //  navigate(`/interview/${ data._id }`) 
 
     } catch (error) {
       console.log(`error _id not availble`)
