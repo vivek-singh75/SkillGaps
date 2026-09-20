@@ -417,9 +417,19 @@ ${userDetails}
 
       const page = await browser.newPage();
 
-      await page.setContent(resumeHTML, {
-          waitUntil: "networkidle0"
+      // Set a reasonable viewport
+      await page.setViewport({
+          width: 1200,
+          height: 1600
       });
+
+      await page.setContent(resumeHTML, {
+          waitUntil: "load",
+          timeout: 30000
+      });
+
+      // Give images/fonts a little time to render
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       const pdfBuffer = await page.pdf({
           format: "A4",
@@ -429,14 +439,14 @@ ${userDetails}
               bottom: "10mm",
               left: "10mm",
               right: "10mm"
-          }
+          },
+          timeout: 30000
       });
 
       return {
           resumeHTML,
           pdfBuffer
       };
-
 
     } catch (error) {
 
