@@ -30,6 +30,7 @@ const Home = () => {
     }
   }
 
+
  useEffect(()=>{
     const showRecentReports = async () =>{
       try {
@@ -45,12 +46,22 @@ const Home = () => {
 
   } , [])
   
+    const showRecentReport  = async ()=>{
+    try {
+      const data  = reports
+      navigate(`/interview/${ data._id }`) 
 
-  if(loading ){
-    return <main>
-            <h1>Loading Your Report...</h1>
-          </main>
+    } catch (error) {
+      console.log(`error _id not availble`)
+    }
   }
+
+
+  // if(loading ){
+  //   return <main>
+  //           <h1>Loading Your Report...</h1>
+  //         </main>
+  // }
   
 
   return (
@@ -212,7 +223,7 @@ const Home = () => {
             <div className="report-card">
               {
                 allData.map((report)=>(
-                  <button key={report._id}>
+                  <button  key={report._id} onClick={showRecentReport}>
                     <h2>{report.title}</h2>
                     <p>Generation time{" "}
                     {new Date(report.createdAt).toLocaleDateString()}</p>
