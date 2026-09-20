@@ -50,7 +50,7 @@ const Home = () => {
     try {
       const data  = reports
       console.log(data)
-    //  navigate(`/interview/${ data._id }`) 
+      navigate(`/interview/${ data[0]._id }`) 
 
     } catch (error) {
       console.log(`error _id not availble`)
