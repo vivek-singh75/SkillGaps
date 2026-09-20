@@ -40,7 +40,12 @@ async function registerUserController(req , res) {
             expiresIn: "15d"
         } );
 
-    res.cookie("token" , token);
+    res.cookie("token", token, {  //after deployment 
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        maxAge: 15 * 24 * 60 * 60 * 1000
+    });
 
     res.status(201).json({
         message : "account created successfully",
@@ -76,7 +81,13 @@ async function loginController(req , res) {
             expiresIn: "15d"
         } );
   
-    res.cookie("token" , token);
+    //res.cookie("token" , token);
+    res.cookie("token", token, {    //for deployment 
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        maxAge: 15 * 24 * 60 * 60 * 1000
+    });
 
     res.status(202).json({
         message: "user loggedIn successfully",
