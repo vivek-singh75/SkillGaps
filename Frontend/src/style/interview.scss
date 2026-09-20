@@ -99,7 +99,6 @@ body {
   border-bottom: 1px solid #202a32;
 }
 
-
 .brand-icon {
   width: 38px;
   height: 38px;
@@ -107,6 +106,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  flex-shrink: 0;
 
   border-radius: 9px;
 
@@ -123,7 +124,6 @@ body {
   font-weight: 800;
 }
 
-
 .brand-area h2 {
   margin: 0;
 
@@ -131,7 +131,6 @@ body {
 
   font-size: 14px;
 }
-
 
 .brand-area span {
   display: block;
@@ -162,14 +161,12 @@ body {
   letter-spacing: 1.4px;
 }
 
-
 .section-navigation {
   display: flex;
   flex-direction: column;
 
   gap: 5px;
 }
-
 
 .navigation-item {
   width: 100%;
@@ -198,20 +195,17 @@ body {
   transition: 0.2s ease;
 }
 
-
 .navigation-item:hover {
   background: #111b23;
 
   color: #b9c9d2;
 }
 
-
 .navigation-item.active {
   background: rgba(0, 198, 167, 0.1);
 
   color: #28d5ba;
 }
-
 
 .nav-number {
   width: 26px;
@@ -221,6 +215,8 @@ body {
   align-items: center;
   justify-content: center;
 
+  flex-shrink: 0;
+
   border: 1px solid #27343d;
 
   border-radius: 5px;
@@ -228,9 +224,7 @@ body {
   font-size: 7px;
 }
 
-
-.navigation-item.active
-.nav-number {
+.navigation-item.active .nav-number {
   border-color: rgba(0, 198, 167, 0.4);
 
   color: #28d5ba;
@@ -238,7 +232,7 @@ body {
 
 
 /* =====================================================
-   CENTER
+   CENTER CONTENT
 ===================================================== */
 
 .content-panel {
@@ -249,7 +243,12 @@ body {
 
   background: #0d141b;
 
-  overflow: hidden;
+  /*
+    IMPORTANT:
+    Do not hide overflowing content.
+    The page itself should scroll naturally.
+  */
+  overflow: visible;
 }
 
 
@@ -261,12 +260,12 @@ body {
   display: flex;
 
   align-items: flex-end;
-
   justify-content: space-between;
 
   gap: 20px;
-}
 
+  min-width: 0;
+}
 
 .section-label {
   color: #2acbb5;
@@ -278,7 +277,6 @@ body {
   letter-spacing: 1.4px;
 }
 
-
 .content-heading h1 {
   margin: 7px 0 0;
 
@@ -289,21 +287,28 @@ body {
   letter-spacing: -0.5px;
 }
 
+.main-header-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  flex-shrink: 0;
+}
 
 .question-count {
-  padding: 5px 10px;
+  padding: 7px 12px;
 
-  border: 1px solid #26343e;
+  border: 1px solid #26313d;
 
   border-radius: 20px;
 
-  color: #7b8d98;
+  color: #7f8b98;
 
-  font-size: 8px;
+  font-size: 11px;
 
   white-space: nowrap;
 }
-
 
 .heading-line {
   width: 100%;
@@ -327,18 +332,21 @@ body {
 
   gap: 11px;
 
-  max-height: calc(100vh - 145px);
+  /*
+    IMPORTANT:
+    Remove fixed viewport height.
+    This prevents question cards from being clipped.
+  */
+  max-height: none;
 
-  overflow-y: auto;
+  overflow: visible;
 
   padding-right: 5px;
 }
 
-
 .questions-wrapper::-webkit-scrollbar {
   width: 4px;
 }
-
 
 .questions-wrapper::-webkit-scrollbar-thumb {
   background: #2b3a44;
@@ -367,11 +375,9 @@ body {
     background 0.2s ease;
 }
 
-
 .question-item:hover {
   border-color: #31424d;
 }
-
 
 .question-item.expanded {
   border-color: rgba(0, 198, 167, 0.32);
@@ -388,6 +394,7 @@ body {
   width: 100%;
 
   min-height: 65px;
+  height: auto;
 
   display: flex;
   align-items: center;
@@ -408,13 +415,20 @@ body {
   font-family: inherit;
 
   cursor: pointer;
+
+  box-sizing: border-box;
 }
 
+
+/* =====================================================
+   QUESTION NUMBER
+===================================================== */
 
 .question-number {
   width: 33px;
   height: 25px;
 
+  flex: 0 0 33px;
   flex-shrink: 0;
 
   display: flex;
@@ -433,6 +447,10 @@ body {
 }
 
 
+/* =====================================================
+   QUESTION TEXT
+===================================================== */
+
 .question-text {
   min-width: 0;
 
@@ -445,6 +463,14 @@ body {
   font-weight: 600;
 
   line-height: 1.5;
+
+  /*
+    IMPORTANT:
+    Long questions must wrap instead of getting cut.
+  */
+  overflow-wrap: anywhere;
+
+  word-break: normal;
 }
 
 
@@ -456,6 +482,7 @@ body {
   width: 28px;
   height: 28px;
 
+  flex: 0 0 28px;
   flex-shrink: 0;
 
   display: flex;
@@ -478,7 +505,6 @@ body {
     border-color 0.25s ease,
     background 0.25s ease;
 }
-
 
 .dropdown-icon.open {
   transform: rotate(180deg);
@@ -507,13 +533,11 @@ body {
     opacity 0.25s ease;
 }
 
-
 .question-answer.visible {
   grid-template-rows: 1fr;
 
   opacity: 1;
 }
-
 
 .answer-container {
   min-height: 0;
@@ -529,9 +553,7 @@ body {
     border-color 0.3s ease;
 }
 
-
-.question-answer.visible
-.answer-container {
+.question-answer.visible .answer-container {
   padding-top: 17px;
   padding-bottom: 19px;
 
@@ -547,11 +569,9 @@ body {
   margin: 0 0 18px;
 }
 
-
 .answer-section:last-child {
   margin-bottom: 0;
 }
-
 
 .answer-label {
   display: inline-flex;
@@ -567,20 +587,17 @@ body {
   letter-spacing: 1px;
 }
 
-
 .answer-label.intention {
   background: rgba(22, 135, 255, 0.1);
 
   color: #59b4ff;
 }
 
-
 .answer-label.model {
   background: rgba(0, 198, 167, 0.1);
 
   color: #36d7be;
 }
-
 
 .answer-section p {
   margin: 8px 0 0;
@@ -590,11 +607,14 @@ body {
   font-size: 9px;
 
   line-height: 1.7;
+
+  overflow-wrap: anywhere;
 }
 
 
 /* =====================================================
    RIGHT PANEL
+   MATCH SCORE + SKILLS
 ===================================================== */
 
 .right-panel {
@@ -606,7 +626,7 @@ body {
 
   background: #0b1117;
 
-  overflow-y: auto;
+  overflow: visible;
 }
 
 
@@ -623,7 +643,6 @@ body {
 
   letter-spacing: 1.3px;
 }
-
 
 .score-circle {
   width: 108px;
@@ -645,13 +664,11 @@ body {
     0 0 25px rgba(22, 135, 255, 0.08);
 }
 
-
 .score-circle strong {
   color: #eef4f7;
 
   font-size: 27px;
 }
-
 
 .score-circle span {
   margin-top: -4px;
@@ -661,15 +678,15 @@ body {
   font-size: 9px;
 }
 
-
 .score-message {
   color: #31cdb6;
 
   font-size: 9px;
 
   text-align: center;
-}
 
+  line-height: 1.5;
+}
 
 .right-divider {
   height: 1px;
@@ -694,7 +711,6 @@ body {
   letter-spacing: 1.3px;
 }
 
-
 .skill-list {
   display: flex;
   flex-direction: column;
@@ -703,7 +719,6 @@ body {
 
   margin-top: 15px;
 }
-
 
 .skill-tag {
   padding: 10px;
@@ -715,8 +730,9 @@ body {
   font-size: 9px;
 
   line-height: 1.35;
-}
 
+  overflow-wrap: anywhere;
+}
 
 .skill-tag.low {
   border-color: rgba(0, 198, 167, 0.2);
@@ -726,7 +742,6 @@ body {
   color: #42d8bd;
 }
 
-
 .skill-tag.medium {
   border-color: rgba(255, 174, 66, 0.2);
 
@@ -734,7 +749,6 @@ body {
 
   color: #ffb44d;
 }
-
 
 .skill-tag.high {
   border-color: rgba(255, 87, 87, 0.2);
@@ -758,14 +772,16 @@ body {
       220px;
   }
 
-
   .content-panel {
     padding: 30px;
   }
 
-
   .right-panel {
     padding: 30px 15px;
+  }
+
+  .question-header {
+    gap: 11px;
   }
 }
 
@@ -776,20 +792,67 @@ body {
 
 @media (max-width: 950px) {
 
+  /*
+    Sidebar + content on first row.
+    Match score moves below them.
+  */
   .report-shell {
     grid-template-columns:
       190px
       minmax(0, 1fr);
   }
 
+  .content-panel {
+    width: 100%;
 
-  .right-panel {
-    display: none;
+    padding: 28px;
+
+    overflow: visible;
   }
 
+  /*
+    IMPORTANT:
+    Do NOT hide the score on tablet.
+    Move it below the main content.
+  */
+  .right-panel {
+    display: block;
 
-  .content-panel {
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    min-height: auto;
+
     padding: 28px;
+
+    border-left: none;
+
+    border-top: 1px solid #202a32;
+
+    background: #0b1117;
+
+    overflow: visible;
+  }
+
+  .questions-wrapper {
+    max-height: none;
+
+    overflow: visible;
+  }
+
+  .question-header {
+    min-height: 64px;
+
+    padding: 14px;
+  }
+
+  .question-text {
+    font-size: 10.5px;
+  }
+
+  .answer-section p {
+    font-size: 9px;
   }
 }
 
@@ -807,10 +870,13 @@ body {
   }
 
 
-  /* LEFT PANEL BECOMES TOP BAR */
+  /* ===================================================
+     LEFT PANEL BECOMES TOP BAR
+  =================================================== */
 
   .left-panel {
     width: 100%;
+
     min-height: auto;
 
     padding: 15px;
@@ -820,16 +886,13 @@ body {
     border-bottom: 1px solid #202a32;
   }
 
-
   .brand-area {
     padding: 0 3px 13px;
   }
 
-
   .navigation-title {
     display: none;
   }
-
 
   .section-navigation {
     flex-direction: row;
@@ -843,11 +906,9 @@ body {
     scrollbar-width: none;
   }
 
-
   .section-navigation::-webkit-scrollbar {
     display: none;
   }
-
 
   .navigation-item {
     width: auto;
@@ -858,21 +919,54 @@ body {
   }
 
 
+  /* ===================================================
+     CONTENT
+  =================================================== */
+
   .content-panel {
     width: 100%;
 
-    min-height: calc(100vh - 95px);
+    min-height: auto;
 
     padding: 25px 20px;
 
     overflow: visible;
   }
 
-
   .questions-wrapper {
+    width: 100%;
+
     max-height: none;
 
     overflow: visible;
+
+    gap: 10px;
+  }
+
+
+  /* ===================================================
+     MATCH SCORE
+  =================================================== */
+
+  .right-panel {
+    display: block;
+
+    width: 100%;
+
+    min-height: auto;
+
+    padding: 28px 20px;
+
+    border-left: none;
+
+    border-top: 1px solid #202a32;
+
+    overflow: visible;
+  }
+
+  .score-circle {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -887,11 +981,14 @@ body {
     padding: 12px;
   }
 
-
   .content-panel {
     padding: 22px 14px;
   }
 
+
+  /* ===================================================
+     HEADER
+  =================================================== */
 
   .content-heading {
     align-items: flex-start;
@@ -901,70 +998,126 @@ body {
     gap: 10px;
   }
 
-
   .content-heading h1 {
     font-size: 20px;
   }
 
-
   .question-count {
-    font-size: 7px;
-  }
+    padding: 6px 10px;
 
+    font-size: 8px;
+  }
 
   .heading-line {
     margin: 19px 0;
   }
 
 
+  /* ===================================================
+     QUESTION
+  =================================================== */
+
   .question-header {
     min-height: 62px;
+
+    width: 100%;
 
     gap: 9px;
 
     padding: 12px;
-  }
 
+    align-items: flex-start;
+  }
 
   .question-number {
     width: 30px;
     height: 24px;
+
+    flex: 0 0 30px;
+
+    margin-top: 1px;
   }
 
-
   .question-text {
+    min-width: 0;
+
     font-size: 10px;
 
     line-height: 1.5;
-  }
 
+    overflow-wrap: anywhere;
+  }
 
   .dropdown-icon {
     width: 25px;
     height: 25px;
 
+    flex: 0 0 25px;
+
     font-size: 13px;
   }
 
 
+  /* ===================================================
+     ANSWER
+  =================================================== */
+
   .answer-container {
     padding-left: 51px;
+
+    padding-right: 12px;
   }
 
-
-  .question-answer.visible
-  .answer-container {
+  .question-answer.visible .answer-container {
     padding-top: 14px;
+
     padding-bottom: 16px;
   }
 
-
   .answer-section p {
-    font-size: 8.5px;
+    font-size: 9px;
 
     line-height: 1.65;
+
+    overflow-wrap: anywhere;
   }
 
+
+  /* ===================================================
+     SCORE
+  =================================================== */
+
+  .right-panel {
+    padding: 25px 14px;
+  }
+
+  .score-circle {
+    width: 95px;
+    height: 95px;
+
+    margin: 14px auto 10px;
+  }
+
+  .score-circle strong {
+    font-size: 24px;
+  }
+
+  .score-circle span {
+    font-size: 8px;
+  }
+
+  .score-message {
+    font-size: 9px;
+  }
+
+  .skill-tag {
+    font-size: 9px;
+  }
+
+
+  /* ===================================================
+     NAVIGATION
+  =================================================== */
 
   .navigation-item {
     min-width: 145px;
@@ -986,40 +1139,55 @@ body {
     padding: 20px 10px;
   }
 
-
   .question-header {
     padding: 10px;
 
     gap: 7px;
   }
 
-
   .question-number {
     width: 27px;
     height: 23px;
 
+    flex: 0 0 27px;
+
     font-size: 7px;
   }
 
-
   .question-text {
     font-size: 9px;
-  }
 
+    line-height: 1.45;
+  }
 
   .dropdown-icon {
     width: 23px;
     height: 23px;
-  }
 
+    flex: 0 0 23px;
+
+    font-size: 12px;
+  }
 
   .answer-container {
     padding-left: 44px;
+
+    padding-right: 10px;
+  }
+
+  .answer-section p {
+    font-size: 8.5px;
+  }
+
+  .right-panel {
+    padding: 24px 14px;
+  }
+
+  .score-circle {
+    width: 90px;
+    height: 90px;
   }
 }
-
-
-
 
 
 /* =====================================================
@@ -1053,6 +1221,7 @@ body {
   width: 100%;
 
   margin: 0;
+
   padding: 0 0 30px;
 }
 
@@ -1076,9 +1245,6 @@ body {
   background: #263740;
 }
 
-
-/* Don't show line after final item */
-
 .roadmap-item:last-child {
   padding-bottom: 0;
 }
@@ -1099,6 +1265,7 @@ body {
   flex-shrink: 0;
 
   position: relative;
+
   z-index: 2;
 
   display: flex;
@@ -1131,7 +1298,6 @@ body {
   padding-top: 2px;
 }
 
-
 .roadmap-details > span {
   display: inline-flex;
 
@@ -1150,7 +1316,6 @@ body {
   letter-spacing: 0.7px;
 }
 
-
 .roadmap-details h2 {
   margin: 8px 0 10px;
 
@@ -1159,6 +1324,8 @@ body {
   font-size: 14px;
 
   line-height: 1.4;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -1173,9 +1340,9 @@ body {
   gap: 7px;
 
   margin: 0;
+
   padding: 0 0 0 18px;
 }
-
 
 .roadmap-details li {
   color: #8797a1;
@@ -1183,8 +1350,9 @@ body {
   font-size: 9px;
 
   line-height: 1.6;
-}
 
+  overflow-wrap: anywhere;
+}
 
 .roadmap-details li::marker {
   color: #1687ff;
@@ -1195,8 +1363,7 @@ body {
    ROADMAP HOVER
 ===================================================== */
 
-.roadmap-item:hover
-.roadmap-marker {
+.roadmap-item:hover .roadmap-marker {
   border-color: #2acbb5;
 
   color: #2acbb5;
@@ -1205,15 +1372,13 @@ body {
     0 0 14px rgba(0, 198, 167, 0.12);
 }
 
-
-.roadmap-item:hover
-.roadmap-details h2 {
+.roadmap-item:hover .roadmap-details h2 {
   color: #f1f6f8;
 }
 
 
 /* =====================================================
-   TABLET
+   ROADMAP TABLET
 ===================================================== */
 
 @media (max-width: 950px) {
@@ -1224,12 +1389,10 @@ body {
     padding-bottom: 28px;
   }
 
-
   .roadmap-marker {
     width: 34px;
     height: 34px;
   }
-
 
   .roadmap-item::before {
     left: 16px;
@@ -1237,11 +1400,9 @@ body {
     top: 34px;
   }
 
-
   .roadmap-details h2 {
     font-size: 13px;
   }
-
 
   .roadmap-details li {
     font-size: 9px;
@@ -1250,7 +1411,7 @@ body {
 
 
 /* =====================================================
-   MOBILE
+   ROADMAP MOBILE
 ===================================================== */
 
 @media (max-width: 600px) {
@@ -1261,7 +1422,6 @@ body {
     padding-bottom: 24px;
   }
 
-
   .roadmap-marker {
     width: 31px;
     height: 31px;
@@ -1269,18 +1429,15 @@ body {
     font-size: 7px;
   }
 
-
   .roadmap-item::before {
     left: 15px;
 
     top: 31px;
   }
 
-
   .roadmap-details {
     padding-top: 1px;
   }
-
 
   .roadmap-details > span {
     padding: 3px 7px;
@@ -1288,20 +1445,17 @@ body {
     font-size: 6px;
   }
 
-
   .roadmap-details h2 {
     margin: 7px 0 8px;
 
     font-size: 11px;
   }
 
-
   .roadmap-details ul {
     gap: 6px;
 
     padding-left: 15px;
   }
-
 
   .roadmap-details li {
     font-size: 8.5px;
@@ -1312,7 +1466,7 @@ body {
 
 
 /* =====================================================
-   SMALL MOBILE
+   ROADMAP SMALL MOBILE
 ===================================================== */
 
 @media (max-width: 400px) {
@@ -1323,7 +1477,6 @@ body {
     padding-bottom: 21px;
   }
 
-
   .roadmap-marker {
     width: 28px;
     height: 28px;
@@ -1331,18 +1484,15 @@ body {
     font-size: 6.5px;
   }
 
-
   .roadmap-item::before {
     left: 13.5px;
 
     top: 28px;
   }
 
-
   .roadmap-details h2 {
     font-size: 10px;
   }
-
 
   .roadmap-details li {
     font-size: 8px;
@@ -1350,113 +1500,143 @@ body {
 }
 
 
-.main-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.question-count {
-    padding: 7px 12px;
-    border: 1px solid #26313d;
-    border-radius: 20px;
-    color: #7f8b98;
-    font-size: 11px;
-}
-
-@media (max-width: 450px) {
-
-    .generate-resume-btn {
-        padding: 8px;
-        font-size: 0;
-    }
-
-    .generate-resume-btn span {
-        font-size: 14px;
-    }
-}
-
-.sidebar-header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-}
+/* =====================================================
+   GENERATE RESUME BUTTON
+===================================================== */
 
 .generate-resume-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
 
-    padding: 10px 14px;
+  align-items: center;
 
-    border: 1px solid rgba(139, 92, 246, 0.45);
-    border-radius: 8px;
+  gap: 8px;
 
-    background: rgba(139, 92, 246, 0.1);
-    color: #c4b5fd;
+  padding: 10px 14px;
 
-    font-size: 11px;
-    font-weight: 600;
+  border: 1px solid rgba(139, 92, 246, 0.45);
 
-    cursor: pointer;
-    transition: 0.2s ease;
+  border-radius: 8px;
 
-    &:hover {
-        background: rgba(139, 92, 246, 0.18);
-        border-color: #8b5cf6;
-    }
+  background: rgba(139, 92, 246, 0.1);
+
+  color: #c4b5fd;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
 }
 
+.generate-resume-btn:hover {
+  background: rgba(139, 92, 246, 0.18);
+
+  border-color: #8b5cf6;
+}
+
+
+/* =====================================================
+   SIDEBAR HEADER
+===================================================== */
+
+.sidebar-header {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 18px;
+}
+
+
+/* =====================================================
+   BRAND RESPONSIVE
+===================================================== */
 
 .brand-area {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 10px;
 }
+
 
 /* Logo */
+
 .brand-area .brand-icon {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
+
 
 /* Brand text */
+
 .brand-area .brand-icon + div {
-    flex: 1;
+  flex: 1;
+
+  min-width: 0;
 }
+
 
 /* Button */
+
 .brand-area .generate-resume-btn {
-    flex-basis: 100%;
-    width: fit-content;
-    margin: 4px 0 0 0;
+  flex-basis: 100%;
+
+  width: fit-content;
+
+  margin: 4px 0 0 0;
 }
 
 
-/* =========================
-   MOBILE
-   ========================= */
+/* =====================================================
+   MOBILE BRAND
+===================================================== */
 
 @media (max-width: 600px) {
 
-    .brand-area {
-        flex-wrap: nowrap;
-        gap: 8px;
-    }
+  .brand-area {
+    flex-wrap: nowrap;
 
-    .brand-area .brand-icon + div {
-        flex: 1;
-        min-width: 0;
-    }
+    gap: 8px;
+  }
 
-    .brand-area .generate-resume-btn {
-        flex-basis: auto;
-        width: auto;
-        flex-shrink: 0;
-        margin: 0 0 0 auto;
-    }
+  .brand-area .brand-icon + div {
+    flex: 1;
+
+    min-width: 0;
+  }
+
+  .brand-area .generate-resume-btn {
+    flex-basis: auto;
+
+    width: auto;
+
+    flex-shrink: 0;
+
+    margin: 0 0 0 auto;
+  }
 }
 
 
+/* =====================================================
+   GENERATE RESUME BUTTON - SMALL MOBILE
+===================================================== */
 
+@media (max-width: 450px) {
+
+  .generate-resume-btn {
+    padding: 8px;
+
+    font-size: 0;
+  }
+
+  .generate-resume-btn span {
+    font-size: 14px;
+  }
+}
