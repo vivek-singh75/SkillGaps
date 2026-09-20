@@ -10,10 +10,23 @@ const resumeRouter = require("../src/routes/resume.route");
 
 app.use(express.json());
 app.use(cookieParser());
+
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://vivek-singh75.github.io"
+];
+
 app.use(cors({
-    origin: "https://vivek-singh75.github.io",
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true
 }));
+
 
 app.use("/api/auth", authRoute);
 app.use("/api/interviewReport", interviewRouter);
