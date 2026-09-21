@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import Loading from '../components/loadingAnimation/Loading';
 
 const Register = () => {
 
@@ -18,7 +19,7 @@ const Register = () => {
     }
 
      if(loading){
-        return (<main><h1>Loading...</h1></main>)
+        return (<main>{<Loading/>}</main>)
     }
   return (
     <main>

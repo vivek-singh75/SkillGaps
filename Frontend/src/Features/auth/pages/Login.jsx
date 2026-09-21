@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "../form.style.scss"
 import { Link, useNavigate } from 'react-router-dom'
 import  {useAuth}  from '../hooks/useAuth'
+import Loading from '../components/loadingAnimation/Loading'
 
 const Login = () => {
 
@@ -20,7 +21,7 @@ const Login = () => {
     }
 
     if(loading){
-        return (<main><h1>Loading...</h1></main>)
+        return (<main>{<Loading label='Login...'/>}</main>)
     }
 
   return (
