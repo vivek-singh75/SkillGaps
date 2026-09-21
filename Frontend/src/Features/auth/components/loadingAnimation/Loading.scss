@@ -1,0 +1,69 @@
+@use "sass:math";
+
+$dot-count: 24;
+$core: #eaf6ff;      // hot centre of a dot
+$glow: #1e90ff;      // main blue
+$glow-deep: #0a4fff; // outer halo
+
+.loader {
+  --loader-size: 260px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--loader-size);
+  height: var(--loader-size);
+  background: #050505;
+}
+
+.loader__ring {
+  position: absolute;
+  inset: 0;
+  animation: loader-spin 1.6s linear infinite;
+}
+
+.loader__dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, $core 0%, $glow 45%, $glow-deep 100%);
+}
+
+// Each dot sits on the ring, and grows / brightens toward the head of the trail.
+@for $i from 1 through $dot-count {
+  $t: math.div($i, $dot-count);            // 0 = tail, 1 = head
+  $angle: math.div(360deg, $dot-count) * $i;
+  $size: 2px + 12px * $t * $t;             // squared easing: tiny tail, fat head
+  $alpha: 0.08 + 0.92 * $t * $t;
+
+  .loader__dot--#{$i} {
+    width: $size;
+    height: $size;
+    margin: math.div(-$size, 2) 0 0 math.div(-$size, 2);
+    opacity: $alpha;
+    transform: rotate($angle) translateY(calc(var(--loader-size) / -2 + 26px));
+    box-shadow:
+      0 0 #{$size * 0.9} rgba($glow, $alpha),
+      0 0 #{$size * 2.4} rgba($glow-deep, $alpha * 0.7);
+  }
+}
+
+.loader__label {
+  position: relative;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: calc(var(--loader-size) * 0.105);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: #6db6ff;
+  text-shadow:
+    0 0 6px rgba($glow, 0.8),
+    0 0 18px rgba($glow-deep, 0.6);
+}
+
+@keyframes loader-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader__ring { animation-duration: 6s; }
+}
