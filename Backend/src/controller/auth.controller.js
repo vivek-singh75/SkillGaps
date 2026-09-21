@@ -101,29 +101,44 @@ async function loginController(req , res) {
 }
 
 
-async function logoutController(req , res) {
-    const token  = req.headers.cookie;
+async function logoutController(req, res) {
+    try {
 
-    
-    if(token.length < 10){      //this will verify that user is logined aur not 
-        return res.status(402).json({
-            message: "user not logined",
-            
-        })
+        const token = req.cookies?.token;
+
+        // User is not logged in
+        if (!token) {
+            return res.status(401).json({
+                message: "User is not logged in"
+            });
+        }
+
+        // Add token to blacklist
+        await tokenBlackListModel.create({
+            token
+        });
+
+        // Clear cookie
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            path: "/"
+        });
+
+        return res.status(200).json({
+            message: "Logout successful"
+        });
+
+    } catch (error) {
+
+        console.error("Logout error:", error);
+
+        return res.status(500).json({
+            message: "Logout failed"
+        });
     }
-
-    if(token){
-        await tokenBlackListModel.create({token})
-    }
-
-    res.clearCookie("token")
-
-    res.status(200).json({
-        message : "Logout Successfull "
-    });
-
 }
-
 
 async function getMe(req, res) {
     try {
