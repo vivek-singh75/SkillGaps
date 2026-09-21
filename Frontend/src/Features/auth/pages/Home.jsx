@@ -8,7 +8,7 @@ import Loading from "../components/loadingAnimation/Loading.jsx";
 
 const Home = () => {
 
-  const { loading , setLoading, reports,  generateReport ,getReportById , getReports} = useInterview();
+  const { loading , reports,  generateReport ,getReportById , getReports} = useInterview();
 
   const navigate = useNavigate()
 
@@ -20,11 +20,7 @@ const Home = () => {
 
   const handleInterviewReports = async ()=>{
     const resumeFile = resume.current.files[0]
-    setLoading(true)
-  
-    if(loading){
-      <main>{<Loading label="Generating..."/>}</main>
-    }
+   
     try {
       const data = await generateReport({jobDescription , selfDescription , resumeFile});
 
