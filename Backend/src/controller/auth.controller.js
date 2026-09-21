@@ -82,10 +82,11 @@ async function loginController(req , res) {
         } );
   
     //res.cookie("token" , token);
-    res.cookie("token", token, {    //for deployment 
+    res.cookie("token", token, {
         httpOnly: true,
         secure: true,
         sameSite: "none",
+        path: "/",
         maxAge: 15 * 24 * 60 * 60 * 1000
     });
 
@@ -103,22 +104,18 @@ async function loginController(req , res) {
 
 async function logoutController(req, res) {
     try {
-
         const token = req.cookies?.token;
 
-        // User is not logged in
         if (!token) {
             return res.status(401).json({
                 message: "User is not logged in"
             });
         }
 
-        // Add token to blacklist
         await tokenBlackListModel.create({
             token
         });
 
-        // Clear cookie
         res.clearCookie("token", {
             httpOnly: true,
             secure: true,
@@ -131,7 +128,6 @@ async function logoutController(req, res) {
         });
 
     } catch (error) {
-
         console.error("Logout error:", error);
 
         return res.status(500).json({
@@ -139,7 +135,6 @@ async function logoutController(req, res) {
         });
     }
 }
-
 async function getMe(req, res) {
     try {
         const token = req.cookies?.token;
