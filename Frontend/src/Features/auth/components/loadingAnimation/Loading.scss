@@ -12,7 +12,7 @@ $glow-deep: #0a4fff; // outer halo
   place-items: center;
   width: var(--loader-size);
   height: var(--loader-size);
-  background: #050505;
+  background:transparent;
 }
 
 .loader__ring {
