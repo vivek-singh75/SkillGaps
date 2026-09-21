@@ -3,7 +3,7 @@ const tokenBlackListModel  = require("../models/blacklist.model");
 const config = require("../config/config")
 
 async function authUser(req , res , next) {
-    const token =  req.cookies.token;
+    const token =  req.cookies?.token;
 
     if(!token){
         return res.status(401).json({
@@ -15,7 +15,7 @@ async function authUser(req , res , next) {
 
     if(isTokenIsBlacklisted){
         return res.status(401).json({
-            message : "token is blacklisted "
+            message : "cookie is not valid  "
         }); 
     }
     try {
