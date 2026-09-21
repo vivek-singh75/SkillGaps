@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { generateTargetedResume } from "../services/resume.api";
 import "../../../style/resumeGenerator.scss";
+import Loading from "../components/loadingAnimation/Loading";
 
 const ResumeGenerator = () => {
 
-    const [loading, setLoading] = useState(false);
+    const [loading , setLoading] = useState(false);
     const [error, setError] = useState("");
+
+   
 
     const handleGenerateResume = async () => {
 
@@ -133,7 +136,7 @@ const ResumeGenerator = () => {
                         {loading ? (
                             <>
                                 <span className="loader"></span>
-                                Generating Resume...
+                               {<Loading label="Generating..."/>}
                             </>
                         ) : (
                             "Generate Targeted Resume"

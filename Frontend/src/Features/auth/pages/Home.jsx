@@ -2,12 +2,13 @@ import React, { useState , useRef, useEffect } from "react";
 import "../../../style/Home.style.scss";
 import { useInterview } from "../hooks/useInterview.js"
 import { useNavigate } from 'react-router-dom';   
+import Loading from "../components/loadingAnimation/Loading.jsx";
 
 
 
 const Home = () => {
 
-  const { loading , reports,  generateReport ,getReportById , getReports} = useInterview();
+  const { loading , setLoading, reports,  generateReport ,getReportById , getReports} = useInterview();
 
   const navigate = useNavigate()
 
@@ -19,11 +20,17 @@ const Home = () => {
 
   const handleInterviewReports = async ()=>{
     const resumeFile = resume.current.files[0]
+    setLoading(true)
+  
+    if(loading){
+      <main>{<Loading label="Generating..."/>}</main>
+    }
     try {
       const data = await generateReport({jobDescription , selfDescription , resumeFile});
 
       navigate(`/interview/${ data._id }`) 
 
+      setLoading(false)
     } catch (error) {
 
       return <main><h2>Failed ,  Try Again </h2></main>
