@@ -68,7 +68,7 @@ export  const useAuth = ()=>{
             setUser(null)
 
         } catch (err) {
-            
+            throw Error("in useAuth logout api give error")
         } finally{
             setLoading(false)
         }

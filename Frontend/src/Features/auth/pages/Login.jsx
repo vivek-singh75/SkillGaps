@@ -21,7 +21,7 @@ const Login = () => {
     }
 
     if(loading){
-        return (<main>{<Loading label='Login...'/>}</main>)
+        return (<main>{<Loading/>}</main>)
     }
 
   return (

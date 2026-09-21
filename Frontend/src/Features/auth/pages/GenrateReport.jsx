@@ -1,5 +1,5 @@
 import React, { useState , useRef, useEffect } from "react";
-import "../../../style/Home.style.scss";
+import "../../../style/Generate.Report.style.scss";
 import { useInterview } from "../hooks/useInterview.js"
 import { useNavigate } from 'react-router-dom';   
 import Loading from "../components/loadingAnimation/Loading.jsx";

@@ -13,7 +13,7 @@ const Protected = ({children}) => {   // this was created to prevent access the 
     return(<main>{<Loading/>}</main>)         //wrap the which wee want to prevent unauthorize access
    } 
    if(!user){
-        return <Navigate to = {"/login"}/>
+        return <Navigate to = {"/"}/>
    }
    return children
 }

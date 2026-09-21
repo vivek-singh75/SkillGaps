@@ -19,7 +19,7 @@ const Register = () => {
     }
 
      if(loading){
-        return (<main>{<Loading label='Creating...'/>}</main>)
+        return (<main>{<Loading />}</main>)
     }
   return (
     <main>
