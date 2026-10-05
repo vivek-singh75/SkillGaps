@@ -1,6 +1,7 @@
 const { PDFParse } = require("pdf-parse");
 const { generateInterviewReport } = require("../services/ai.services");
 const interviewReportModel = require("../models/interviewReport.model");
+const userModel = require("../models/userModel")
 
 
 
@@ -66,7 +67,13 @@ async function getAllInterviewReportBy(req ,res) {
     .sort({ createdAt: -1 })
     .select("-resume -selfDescription -jobDescription -__v -technicalQuestion -behavioralQuestion -skillGap -preparationPlan");
 
+    const userId = interviewReport[0].user
+
+    const userDetails = await userModel.findById(userId)
     
+    console.log(userId)
+    console.log(userDetails)
+
     res.status(200).json({
         message : "interview report fetched succesfully",
         interviewReport

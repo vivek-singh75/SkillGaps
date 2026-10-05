@@ -32,4 +32,5 @@ app.use("/api/auth", authRoute);
 app.use("/api/interviewReport", interviewRouter);
 app.use("/api/resume", resumeRouter);
 
+
 module.exports = app;
