@@ -141,10 +141,6 @@ const InterviewReport = () => {
 
   },[interviewId])
 
-
-
-
-
   const toggleQuestion = (id) => {
     setExpandedQuestion(
       expandedQuestion === id ? null : id

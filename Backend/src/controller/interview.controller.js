@@ -61,25 +61,36 @@ async function getInterviewReportById(req , res) {
 } 
 
  
-async function getAllInterviewReportBy(req ,res) {
+async function getAllInterviewReportBy(req, res) {
+  try {
+    const userId = req.user.userId;
+
     const interviewReport = await interviewReportModel
-    .find({ user: req.user.userId })
-    .sort({ createdAt: -1 })
-    .select("-resume -selfDescription -jobDescription -__v -technicalQuestion -behavioralQuestion -skillGap -preparationPlan");
+      .find({ user: userId })
+      .sort({ createdAt: -1 })
+      .select(
+        "-resume -selfDescription -jobDescription -__v -technicalQuestion -behavioralQuestion -skillGap -preparationPlan"
+      );
 
-    const userId = interviewReport[0].user
-
-    const userDetails = await userModel.findById(userId)
-    
-    console.log(userId)
-    console.log(userDetails)
+    const userDetails = await userModel
+      .findById(userId)
+      .select("_id username");
 
     res.status(200).json({
-        message : "interview report fetched succesfully",
-        interviewReport
-    })
-}
+      message: "interview report fetched successfully",
+      userDetails,
+      interviewReport,
+    });
 
+  } catch (error) {
+    console.log("Error fetching interview reports:", error);
+
+    res.status(500).json({
+      message: "Failed to fetch interview reports",
+      error: error.message,
+    });
+  }
+}
 
 
 module.exports= { 

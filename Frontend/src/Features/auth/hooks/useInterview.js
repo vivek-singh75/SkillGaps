@@ -74,6 +74,7 @@ export const useInterview =  () => {
             const response = await getAllInterviewReports();
 
             const interviewReports = response.interviewReport;
+            const userDetails=  response.userDetails;
 
             const reportData = interviewReports.map((report) => ({
                 _id: report._id,
@@ -83,12 +84,22 @@ export const useInterview =  () => {
                 createdAt: report.createdAt
             }));
 
+            // console.log("FULL RESPONSE:", response);
+            // console.log("USER DETAILS:", response?.userDetails);
+            // console.log("INTERVIEW REPORT:", response?.interviewReport);
             setReports(reportData);
 
-            return reportData;
+            return{ 
+                reportData ,
+                userDetails
+            };
 
         } catch (error) {
             console.log(`error in getReports ${error}`);
+             return {
+                reportData: [],
+                userDetails: null,
+                };
         } finally {
             setLoading(false);
         }
