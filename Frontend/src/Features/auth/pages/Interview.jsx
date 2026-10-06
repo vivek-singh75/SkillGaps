@@ -242,13 +242,15 @@ const InterviewReport = () => {
         <aside className="left-panel">
 
           <div className="brand-area">
-            <div className="brand-icon">
+            <button className="brand-icon"
+            onClick={()=>navigate("/")}
+            >
               SG
-            </div>
+            </button>
 
             <div>
               <h2>SkillGaps</h2>
-              <span>AI INTERVIEW</span>
+              <span>AI CAREER PREP</span>
             </div>
           <button
               className="generate-resume-btn"
