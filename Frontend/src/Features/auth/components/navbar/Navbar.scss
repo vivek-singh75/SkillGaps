@@ -1,34 +1,29 @@
 /* =========================================================
-   GLOBAL NAVBAR
+   NAVBAR
 ========================================================= */
 
 .dashboard-navbar {
   position: sticky;
   top: 0;
-  left: 0;
-
   z-index: 1000;
 
   width: 100%;
   min-width: 100%;
-
   height: 72px;
 
-  margin: 0;
   padding: 0 28px;
-
-  box-sizing: border-box;
 
   display: flex;
   align-items: center;
 
-  background: #080b12;
+  box-sizing: border-box;
+
+  background: rgba(8, 11, 18, 0.96);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 
   border-bottom: 1px solid #202833;
-
-  color: #ffffff;
-
-  flex-shrink: 0;
 }
 
 
@@ -40,24 +35,22 @@
   display: flex;
   align-items: center;
 
+  gap: 12px;
+
+  text-decoration: none;
+
   flex-shrink: 0;
-
-  color: #ffffff !important;
-
-  text-decoration: none !important;
 }
 
 .brand-logo {
   width: 44px;
   height: 44px;
 
-  min-width: 44px;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 13px;
+  border-radius: 12px;
 
   background: linear-gradient(
     135deg,
@@ -65,74 +58,71 @@
     #8b5cf6
   );
 
-  color: #ffffff !important;
+  color: #ffffff;
 
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
+
+  box-shadow:
+    0 6px 20px rgba(99, 102, 241, 0.25);
 }
 
 .brand-info {
-  margin-left: 11px;
-
   display: flex;
   flex-direction: column;
 
-  white-space: nowrap;
+  line-height: 1;
 }
 
 .brand-info h1 {
   margin: 0;
 
-  color: #ffffff !important;
+  color: #ffffff;
 
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 700;
-  line-height: 1.1;
+
+  letter-spacing: -0.3px;
 }
 
 .brand-info span {
-  margin-top: 4px;
+  margin-top: 5px;
 
-  color: #7d8795 !important;
+  color: #7f8a9a;
 
-  font-size: 9px;
-  font-weight: 600;
+  font-size: 8px;
+  font-weight: 700;
 
-  letter-spacing: 1.2px;
+  letter-spacing: 1.5px;
 }
 
 
 /* =========================================================
-   DESKTOP NAVIGATION
+   DESKTOP NAV LINKS
 ========================================================= */
 
 .dashboard-nav-links {
   display: flex;
   align-items: center;
 
-  gap: 5px;
+  gap: 8px;
 
-  margin-left: 38px;
-
-  flex-shrink: 0;
+  margin-left: 42px;
 }
 
 .nav-link {
-  display: flex;
-  align-items: center;
+  position: relative;
 
-  padding: 9px 13px;
+  padding: 9px 14px;
 
-  border-radius: 8px;
+  color: #9ba5b5;
 
-  color: #aeb7c4 !important;
+  text-decoration: none;
 
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
 
-  text-decoration: none !important;
-
-  white-space: nowrap;
+  border-radius: 8px;
 
   transition:
     color 0.2s ease,
@@ -140,14 +130,14 @@
 }
 
 .nav-link:hover {
-  color: #ffffff !important;
+  color: #ffffff;
 
-  background: rgba(99, 102, 241, 0.12);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 
 /* =========================================================
-   RIGHT SIDE
+   RIGHT SIDE / AUTH
 ========================================================= */
 
 .dashboard-auth {
@@ -156,11 +146,52 @@
   display: flex;
   align-items: center;
 
-  gap: 10px;
+  gap: 12px;
 
   flex-shrink: 0;
+}
 
-  min-width: 0;
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 72px;
+  height: 38px;
+
+  padding: 0 16px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #343d4d;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.login-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+
+  border-color: #596579;
+
+  transform: translateY(-1px);
 }
 
 
@@ -169,18 +200,17 @@
 ========================================================= */
 
 .navbar-resume-btn {
-  height: 38px;
+  height: 40px;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  gap: 7px;
+  gap: 8px;
 
-  padding: 0 15px;
+  padding: 0 16px;
 
-  border: 1px solid rgba(139, 92, 246, 0.5);
-
+  border: none;
   border-radius: 9px;
 
   background: linear-gradient(
@@ -189,16 +219,14 @@
     #8b5cf6
   );
 
-  color: #ffffff !important;
+  color: #ffffff;
 
-  font-family: inherit;
-
-  font-size: 12px;
-  font-weight: 700;
-
-  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
 
   cursor: pointer;
+
+  white-space: nowrap;
 
   box-shadow:
     0 5px 18px rgba(99, 102, 241, 0.22);
@@ -212,42 +240,31 @@
   transform: translateY(-1px);
 
   box-shadow:
-    0 8px 25px rgba(99, 102, 241, 0.38);
-}
-
-.navbar-resume-btn:active {
-  transform: translateY(0);
+    0 8px 24px rgba(99, 102, 241, 0.32);
 }
 
 .resume-icon {
-  color: #ffffff !important;
-
-  font-size: 15px;
-
+  font-size: 16px;
   line-height: 1;
 }
 
 
 /* =========================================================
-   USER
+   USER INFO
 ========================================================= */
 
 .user-info {
   display: flex;
   align-items: center;
 
-  gap: 8px;
+  gap: 9px;
 
-  min-width: 0;
-
-  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .user-avatar {
   width: 38px;
   height: 38px;
-
-  min-width: 38px;
 
   display: flex;
   align-items: center;
@@ -255,32 +272,36 @@
 
   border-radius: 50%;
 
-  background: #6366f1;
+  background: linear-gradient(
+    135deg,
+    #6366f1,
+    #8b5cf6
+  );
 
-  color: #ffffff !important;
+  color: #ffffff;
 
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
+
+  flex-shrink: 0;
 }
 
 .user-name {
-  max-width: 120px;
+  max-width: 130px;
 
   overflow: hidden;
-
   text-overflow: ellipsis;
-
   white-space: nowrap;
 
-  color: #d7dce3 !important;
+  color: #e5e7eb;
 
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
 }
 
 
 /* =========================================================
-   DESKTOP LOGOUT
+   LOGOUT BUTTON
 ========================================================= */
 
 .logout-btn {
@@ -288,38 +309,35 @@
 
   padding: 0 14px;
 
-  border: 1px solid #293341;
-
+  border: 1px solid #343d4d;
   border-radius: 8px;
 
   background: transparent;
 
-  color: #aeb7c4 !important;
+  color: #d6dbe3;
 
-  font-family: inherit;
-
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
 
   cursor: pointer;
 
-  white-space: nowrap;
-
-  transition: 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .logout-btn:hover {
-  color: #ffffff !important;
-
   background: rgba(239, 68, 68, 0.08);
+
+  color: #f87171;
 
   border-color: rgba(239, 68, 68, 0.35);
 }
 
 
 /* =========================================================
-   HAMBURGER
-   Hidden on laptop / desktop
+   MOBILE MENU BUTTON
 ========================================================= */
 
 .mobile-menu-btn {
@@ -328,41 +346,31 @@
   width: 40px;
   height: 40px;
 
-  min-width: 40px;
-
   padding: 0;
 
-  border: none;
+  border: 1px solid #303847;
+  border-radius: 8px;
 
   background: transparent;
-
-  color: #ffffff;
 
   cursor: pointer;
 
   align-items: center;
   justify-content: center;
-
   flex-direction: column;
 
   gap: 5px;
 }
 
 .mobile-menu-btn span {
-  display: block;
-
-  width: 23px;
+  width: 19px;
   height: 2px;
 
   border-radius: 2px;
 
-  background: #c8ced8;
+  background: #d8dee8;
 
-  transition: 0.2s ease;
-}
-
-.mobile-menu-btn:hover span {
-  background: #ffffff;
+  transition: all 0.2s ease;
 }
 
 
@@ -371,266 +379,75 @@
 ========================================================= */
 
 .mobile-menu {
-  display: none;
+  position: absolute;
+
+  top: calc(100% + 1px);
+  right: 16px;
+
+  width: 220px;
+
+  padding: 8px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+
+  background: #0d1119;
+
+  border: 1px solid #252d3a;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+.mobile-menu a,
+.mobile-logout-btn {
+  width: 100%;
+
+  padding: 11px 12px;
+
+  box-sizing: border-box;
+
+  border: none;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #b8c0ce;
+
+  text-align: left;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.mobile-menu a:hover,
+.mobile-logout-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+
+  color: #ffffff;
+}
+
+.mobile-logout-btn {
+  color: #f87171;
 }
 
 
 /* =========================================================
-   TABLET
-   901px and below
-========================================================= */
-
-@media (max-width: 900px) {
-
-  .dashboard-navbar {
-    height: 68px;
-
-    padding: 0 20px;
-  }
-
-  /* Hide desktop navigation */
-
-  .dashboard-nav-links {
-    display: none;
-  }
-
-  /* Hide SkillGaps text */
-
-  .brand-info {
-    display: none;
-  }
-
-  /* Show hamburger */
-
-  .mobile-menu-btn {
-    display: flex;
-  }
-
-  /* Resume remains visible */
-
-  .navbar-resume-btn {
-    display: inline-flex;
-
-    height: 36px;
-
-    padding: 0 12px;
-
-    font-size: 11px;
-  }
-
-  /* Hide desktop logout */
-
-  .logout-btn {
-    display: none;
-  }
-
-  .user-name {
-    max-width: 80px;
-  }
-
-  /* ============================
-     DROPDOWN
-  ============================ */
-
-  .mobile-menu {
-    position: absolute;
-
-    top: calc(100% + 8px);
-
-    right: 16px;
-
-    display: block;
-
-    width: 260px;
-
-    padding: 10px;
-
-    box-sizing: border-box;
-
-    border: 1px solid #293440;
-
-    border-radius: 12px;
-
-    background: #0d131a;
-
-    box-shadow:
-      0 18px 45px rgba(0, 0, 0, 0.55);
-
-    z-index: 2000;
-  }
-
-  .mobile-menu a,
-  .mobile-menu button {
-    width: 100%;
-
-    min-height: 42px;
-
-    box-sizing: border-box;
-
-    display: flex;
-    align-items: center;
-
-    padding: 11px 12px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: transparent;
-
-    color: #b8c1cd !important;
-
-    font-family: inherit;
-
-    font-size: 13px;
-    font-weight: 500;
-
-    text-decoration: none !important;
-
-    cursor: pointer;
-
-    transition:
-      color 0.2s ease,
-      background 0.2s ease;
-  }
-
-  .mobile-menu a:hover,
-  .mobile-menu button:hover {
-    color: #ffffff !important;
-
-    background: rgba(99, 102, 241, 0.12);
-  }
-
-  .mobile-logout-btn {
-    margin-top: 5px;
-
-    color: #f08b8b !important;
-  }
-
-  .mobile-logout-btn:hover {
-    background: rgba(239, 68, 68, 0.10) !important;
-
-    color: #ff9b9b !important;
-  }
-}
-
-
-/* =========================================================
-   MOBILE
-   600px and below
-========================================================= */
-
-@media (max-width: 600px) {
-
-  .dashboard-navbar {
-    width: 100%;
-    min-width: 100%;
-
-    height: 64px;
-
-    padding: 0 12px;
-  }
-
-  .brand-logo {
-    width: 38px;
-    height: 38px;
-
-    min-width: 38px;
-
-    border-radius: 10px;
-
-    font-size: 14px;
-  }
-
-  .dashboard-auth {
-    gap: 6px;
-  }
-
-  /* Resume still visible */
-
-  .navbar-resume-btn {
-    height: 34px;
-
-    padding: 0 10px;
-
-    gap: 5px;
-
-    font-size: 10px;
-
-    border-radius: 8px;
-  }
-
-  .resume-icon {
-    font-size: 13px;
-  }
-
-  .user-name {
-    display: none;
-  }
-
-  .user-avatar {
-    width: 32px;
-    height: 32px;
-
-    min-width: 32px;
-
-    font-size: 12px;
-  }
-
-  .mobile-menu-btn {
-    width: 36px;
-    height: 36px;
-
-    min-width: 36px;
-  }
-
-  .mobile-menu {
-    right: 10px;
-
-    width: min(
-      260px,
-      calc(100vw - 20px)
-    );
-  }
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (max-width: 400px) {
-
-  .dashboard-navbar {
-    padding: 0 9px;
-  }
-
-  .navbar-resume-btn {
-    height: 32px;
-
-    padding: 0 8px;
-
-    font-size: 9px;
-  }
-
-  .user-avatar {
-    width: 30px;
-    height: 30px;
-
-    min-width: 30px;
-  }
-
-  .mobile-menu-btn {
-    width: 34px;
-    height: 34px;
-
-    min-width: 34px;
-  }
-}
-
-
-/* =========================================================
-   LOGOUT MODAL
+   LOGOUT POPUP OVERLAY
 ========================================================= */
 
 .logout-overlay {
@@ -638,7 +455,7 @@
 
   inset: 0;
 
-  z-index: 5000;
+  z-index: 9999;
 
   display: flex;
   align-items: center;
@@ -651,22 +468,32 @@
   background: rgba(0, 0, 0, 0.65);
 
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
-.logout-popup {
-  width: min(380px, 100%);
 
-  padding: 25px;
+/* =========================================================
+   LOGOUT POPUP
+========================================================= */
+
+.logout-popup {
+  width: 100%;
+  max-width: 390px;
+
+  padding: 26px;
 
   box-sizing: border-box;
 
-  border: 1px solid #293440;
+  background: #111722;
+
+  border: 1px solid #293242;
 
   border-radius: 14px;
 
-  background: #10171f;
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.55);
 
-  color: #ffffff;
+  text-align: center;
 }
 
 .logout-popup h3 {
@@ -675,60 +502,251 @@
   color: #ffffff;
 
   font-size: 20px;
+  font-weight: 700;
 }
 
 .logout-popup p {
-  margin: 0 0 22px;
+  margin: 0 0 24px;
 
-  color: #8f9baa;
+  color: #8994a5;
 
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 1.5;
 }
+
+
+/* =========================================================
+   POPUP BUTTONS
+========================================================= */
 
 .logout-popup-actions {
   display: flex;
 
-  justify-content: flex-end;
+  justify-content: center;
 
   gap: 10px;
 }
 
 .cancel-logout,
 .confirm-logout {
-  padding: 9px 15px;
+  height: 40px;
+
+  padding: 0 18px;
 
   border-radius: 8px;
 
-  font-family: inherit;
-
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
 
   cursor: pointer;
 }
 
 .cancel-logout {
-  border: 1px solid #293440;
+  border: 1px solid #343d4d;
 
   background: transparent;
 
-  color: #aeb7c4;
-}
-
-.confirm-logout {
-  border: none;
-
-  background: #ef4444;
-
-  color: #ffffff;
+  color: #c1c8d3;
 }
 
 .cancel-logout:hover {
-  background: #18212b;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.confirm-logout {
+  border: 1px solid #dc2626;
+
+  background: #dc2626;
 
   color: #ffffff;
 }
 
 .confirm-logout:hover {
-  background: #dc2626;
+  background: #ef4444;
+
+  border-color: #ef4444;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .dashboard-navbar {
+    height: 68px;
+
+    padding: 0 20px;
+  }
+
+  .dashboard-nav-links {
+    display: none;
+  }
+
+  .brand-info {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .logout-btn {
+    display: none;
+  }
+
+  /*
+    Generate Resume remains visible
+    in the top navbar on tablet.
+  */
+
+  .navbar-resume-btn {
+    height: 38px;
+
+    padding: 0 13px;
+
+    font-size: 12px;
+  }
+
+  .user-name {
+    max-width: 100px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .dashboard-navbar {
+    height: 64px;
+
+    padding: 0 14px;
+  }
+
+  .brand-logo {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+  }
+
+  .dashboard-auth {
+    gap: 7px;
+  }
+
+  .navbar-resume-btn {
+    height: 36px;
+
+    padding: 0 10px;
+
+    gap: 5px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+  }
+
+  .resume-icon {
+    font-size: 14px;
+  }
+
+  .user-name {
+    display: none;
+  }
+
+  .user-avatar {
+    width: 34px;
+    height: 34px;
+
+    font-size: 13px;
+  }
+
+  .login-btn {
+    min-width: 64px;
+    height: 36px;
+
+    padding: 0 12px;
+
+    font-size: 13px;
+  }
+
+  .mobile-menu-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mobile-menu {
+    right: 12px;
+
+    width: calc(100% - 24px);
+
+    max-width: 320px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .dashboard-navbar {
+    padding: 0 10px;
+  }
+
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .navbar-resume-btn {
+    padding: 0 8px;
+
+    font-size: 10px;
+  }
+
+  .navbar-resume-btn .resume-icon {
+    display: none;
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .mobile-menu-btn {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+
+/* =========================================================
+   GLOBAL WIDTH SAFETY
+========================================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
 }

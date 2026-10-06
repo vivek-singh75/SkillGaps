@@ -14,36 +14,26 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
 
-  // Show Generate Resume only on Interview page
-  const isInterviewPage =
-    location.pathname.startsWith("/interview/");
-
-  /* =====================================================
-     RESUME
-  ===================================================== */
+  const isInterviewPage = location.pathname.startsWith("/interview/");
 
   const handleResume = () => {
     setMenuOpen(false);
     navigate("/resume/download");
   };
 
-  /* =====================================================
-     LOGOUT
-  ===================================================== */
-
   const handleLogoutFunction = async () => {
     try {
       await handleLogout();
+
+      setShowLogoutPopup(false);
+      setMenuOpen(false);
+
       navigate("/login");
     } catch (error) {
-      console.log("Logout failed:", error);
+      console.error("Logout failed:", error);
       alert("Logout failed. Please try again.");
     }
   };
-
-  /* =====================================================
-     CLOSE MOBILE MENU
-  ===================================================== */
 
   const closeMenu = () => {
     setMenuOpen(false);
@@ -53,10 +43,7 @@ const Navbar = () => {
     <>
       <nav className="dashboard-navbar">
 
-        {/* =================================================
-            BRAND
-        ================================================= */}
-
+        {/* ================= BRAND ================= */}
         <Link
           to="/"
           className="dashboard-brand"
@@ -73,10 +60,7 @@ const Navbar = () => {
         </Link>
 
 
-        {/* =================================================
-            DESKTOP NAVIGATION
-        ================================================= */}
-
+        {/* ================= DESKTOP NAV LINKS ================= */}
         <div className="dashboard-nav-links">
 
           <Link
@@ -103,17 +87,10 @@ const Navbar = () => {
         </div>
 
 
-        {/* =================================================
-            RIGHT SIDE
-        ================================================= */}
-
+        {/* ================= AUTH SECTION ================= */}
         <div className="dashboard-auth">
 
-          {/* Generate Resume
-              Only Interview page
-              NOT inside dropdown
-          */}
-
+          {/* Generate Resume */}
           {isInterviewPage && (
             <button
               type="button"
@@ -131,38 +108,44 @@ const Navbar = () => {
           )}
 
 
-          {/* User */}
+          {/* ================= LOGGED OUT ================= */}
+          {!user && (
+            <Link
+              to="/login"
+              className="login-btn"
+            >
+              Login
+            </Link>
+          )}
 
+
+          {/* ================= LOGGED IN ================= */}
           {user && (
-            <div className="user-info">
+            <>
+              <div className="user-info">
 
-              <div className="user-avatar">
-                {user.username?.charAt(0)?.toUpperCase() || "U"}
+                <div className="user-avatar">
+                  {user.username?.charAt(0)?.toUpperCase() || "U"}
+                </div>
+
+                <span className="user-name">
+                  {user.username}
+                </span>
+
               </div>
 
-              <span className="user-name">
-                {user.username}
-              </span>
-
-            </div>
+              <button
+                type="button"
+                className="logout-btn"
+                onClick={() => setShowLogoutPopup(true)}
+              >
+                Logout
+              </button>
+            </>
           )}
 
 
-          {/* Desktop Logout */}
-
-          {user && (
-            <button
-              type="button"
-              className="logout-btn"
-              onClick={() => setShowLogoutPopup(true)}
-            >
-              Logout
-            </button>
-          )}
-
-
-          {/* Mobile / Tablet Hamburger */}
-
+          {/* ================= MOBILE MENU BUTTON ================= */}
           <button
             type="button"
             className="mobile-menu-btn"
@@ -178,13 +161,7 @@ const Navbar = () => {
         </div>
 
 
-        {/* =================================================
-            MOBILE / TABLET DROPDOWN
-
-            IMPORTANT:
-            Generate Resume is NOT here.
-        ================================================= */}
-
+        {/* ================= MOBILE MENU ================= */}
         {menuOpen && (
           <div className="mobile-menu">
 
@@ -222,16 +199,22 @@ const Navbar = () => {
               </button>
             )}
 
+            {!user && (
+              <Link
+                to="/login"
+                onClick={closeMenu}
+              >
+                Login
+              </Link>
+            )}
+
           </div>
         )}
 
       </nav>
 
 
-      {/* =================================================
-          LOGOUT MODAL
-      ================================================= */}
-
+      {/* ================= LOGOUT POPUP ================= */}
       {showLogoutPopup && (
         <div className="logout-overlay">
 
@@ -269,7 +252,6 @@ const Navbar = () => {
 
         </div>
       )}
-
     </>
   );
 };

@@ -11,64 +11,85 @@ import ResumeGenerator from "./Features/auth/pages/ResumeGenerator.jsx";
 import Dashboard from "./Features/auth/pages/Dashboard.jsx";
 import AllReports from "./Features/auth/pages/AllReports.jsx";
 
+import  Navbar   from "./Features/auth/components/navbar/Navbar.jsx"
+
 
 export const router = createHashRouter([
 
-  // =========================
-  // PUBLIC ROUTES
-  // =========================
+  // ==========================================
+  // PUBLIC
+  // ==========================================
 
   {
     path: "/login",
-    element: <Login/>
+    element: <Login />,
   },
 
   {
     path: "/register",
-    element: <Register />
+    element: <Register />,
   },
 
-
-  // =========================
-  // PROTECTED ROUTES
-  // =========================
+  // ==========================================
+  // PUBLIC DASHBOARD + NAVBAR
+  // ==========================================
 
   {
     path: "/",
     element: (
+      <>
+        <Navbar />
+        <Dashboard />
+      </>
+    ),
+  },
+
+  // ==========================================
+  // PROTECTED
+  // ==========================================
+
+  {
+    path: "/generate-Report",
+    element: (
       <Protected>
-        <MainLayout />
+        <MainLayout>
+          <GenerateReport />
+        </MainLayout>
       </Protected>
     ),
+  },
 
-    children: [
+  {
+    path: "/all-report",
+    element: (
+      <Protected>
+        <MainLayout>
+          <AllReports />
+        </MainLayout>
+      </Protected>
+    ),
+  },
 
-      {
-        index: true,
-        element: <Dashboard />
-      },
+  {
+    path: "/interview/:interviewId",
+    element: (
+      <Protected>
+        <MainLayout>
+          <Interview />
+        </MainLayout>
+      </Protected>
+    ),
+  },
 
-      {
-        path: "generate-Report",
-        element: <GenerateReport />
-      },
-
-      {
-        path: "all-report",
-        element: <AllReports />
-      },
-
-      {
-        path: "interview/:interviewId",
-        element: <Interview />
-      },
-
-      {
-        path: "resume/download",
-        element: <ResumeGenerator />
-      }
-
-    ]
-  }
+  {
+    path: "/resume/download",
+    element: (
+      <Protected>
+        <MainLayout>
+          <ResumeGenerator />
+        </MainLayout>
+      </Protected>
+    ),
+  },
 
 ]);
