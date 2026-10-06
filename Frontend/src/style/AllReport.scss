@@ -3,12 +3,13 @@
   min-height: 100vh;
   padding: 35px 45px;
   box-sizing: border-box;
-  background: #080b12;
+  background: rgb(45, 44, 44);
   color: #e5e7eb;
 }
 
 .header {
   margin-bottom: 30px;
+  text-align: center;
 }
 
 .Head {
@@ -43,8 +44,8 @@
   justify-content: space-between;
   gap: 20px;
 
-  background: #101139;
-  border: 1px solid #e5e7eb;
+  background: #3c3e40;
+  border: 1px solid #050a14;
   border-radius: 14px;
 
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
