@@ -27,11 +27,11 @@ const Login = () => {
   return (
     <main>
         <div className="form-Container">
-            <h1>Login</h1>
+            <h1 className='top-heading'>Login</h1>
 
             <form>
                 <div className="input-group">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email" >Email</label>
                     <input 
                     onChange={(e)=>{setEmail(e.target.value)}}
                     type="email" placeholder='Enter your email' required/>

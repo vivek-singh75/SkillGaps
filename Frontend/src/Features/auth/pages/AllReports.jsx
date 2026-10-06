@@ -29,7 +29,13 @@ const AllReports = () => {
     };
 
     fetchReports();
+
   }, []);
+
+  if(!reports){
+    //alert("you dont have any reports")
+    {<main>you dont have any reports</main>}
+  }
 
   const handleViewReport = async(reportId)=>{
     try {
@@ -43,7 +49,7 @@ const AllReports = () => {
     }
 
   }
-
+ 
   return (
     <div className="outer_box">
       <div className="header">

@@ -18,6 +18,7 @@ export  const useAuth = ()=>{
            
         } catch (error) {
             console.log(`login error ${error}`)
+            alert("Wrong Email or Password")
 
         } finally{
             setLoading(false)

@@ -1,21 +1,25 @@
-import React, { Children, use } from 'react'
-import { useAuth } from '../hooks/useAuth'
-import { Navigate } from 'react-router-dom';
-import Loading from './loadingAnimation/Loading';
+import React from "react";
+import { useAuth } from "../hooks/useAuth";
+import { Navigate } from "react-router-dom";
+import Loading from "./loadingAnimation/Loading";
 
+const Protected = ({ children }) => {
 
-const Protected = ({children}) => {   // this was created to prevent access the of some page without login
-  
-   const {loading ,  user} = useAuth();
+    const { loading, user } = useAuth();
 
-   if(loading){
+    if (loading) {
+        return (
+            <main>
+                <Loading />
+            </main>
+        );
+    }
 
-    return(<main>{<Loading/>}</main>)         //wrap the which wee want to prevent unauthorize access
-   } 
-   if(!user){
-        return <Navigate to = {"/"}/>
-   }
-   return children
-}
+    if (!user) {
+        return <Navigate to="/login" replace />;
+    }
 
-export default Protected
+    return children;
+};
+
+export default Protected;

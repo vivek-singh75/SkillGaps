@@ -1,18 +1,19 @@
-import React, { useContext , useState } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { AuthContext } from "../services/auth.context";
+
 import "../../../style/Dashboard.scss";
-import { useAuth } from "../hooks/useAuth";
-
-
 
 const Dashboard = () => {
+
     const navigate = useNavigate();
+
     const { user } = useContext(AuthContext);
-    const { handleLogout } = useAuth()
-    const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+
 
     const handleProtectedNavigation = (path) => {
+
         if (!user) {
             navigate("/login");
             return;
@@ -22,114 +23,9 @@ const Dashboard = () => {
     };
 
 
-    const handleLogoutFunction = async () => {
-        try {
-            await handleLogout();
-            navigate("/login");
-        } catch (error) {
-            console.log("Logout failed:", error);
-            alert("Logout failed. Please try again.");
-        }
-     };
-
     return (
+
         <div className="dashboard">
-
-            {/* ================= NAVBAR ================= */}
-
-            <header className="dashboard-navbar">
-
-                <div
-                    className="dashboard-brand"
-                    onClick={() => navigate("/")}
-                >
-                    <div className="brand-logo">
-                        SG
-                    </div>
-
-                    <div className="brand-info">
-                        <h2>SkillGaps</h2>
-                        <span>AI CAREER PREP</span>
-                    </div>
-                </div>
-
-
-                <nav className="dashboard-nav-links">
-
-                    <button
-                        className="nav-link active"
-                        onClick={() => navigate("/")}
-                    >
-                        Home
-                    </button>
-
-                    <button
-                        className="nav-link"
-                        onClick={() =>
-                            handleProtectedNavigation("/generate-report")
-                        }
-                    >
-                        Generate Report
-                    </button>
-
-                    <button
-                        className="nav-link"
-                        onClick={() =>
-                            handleProtectedNavigation("/all-report")  //we ahave to create api for it
-                        }
-                    >
-                        My Reports
-                    </button>
-
-                </nav>
-
-
-                <div className="dashboard-auth">
-
-                    {user ? (
-                        <>
-                            <div className="user-info">
-
-                                <div className="user-avatar">
-                                    {user.username
-                                        ?.charAt(0)
-                                        .toUpperCase()}
-                                </div>
-
-                                <span>
-                                    {user.username}
-                                </span>
-
-                            </div>
-
-                           <button
-                                className="logout-btn"
-                                onClick={() => setShowLogoutPopup(true)}
-                            >
-                                Logout
-                            </button>
-                        </>
-                    ) : (
-                        <>
-                            <button
-                                className="login-btn"
-                                onClick={() => navigate("/login")}
-                            >
-                                Login
-                            </button>
-
-                            <button
-                                className="register-btn"
-                                onClick={() => navigate("/register")}
-                            >
-                                Create Account
-                            </button>
-                        </>
-                    )}
-
-                </div>
-
-            </header>
 
 
             {/* ================= MAIN ================= */}
@@ -143,30 +39,40 @@ const Dashboard = () => {
 
                     <div className="hero-content">
 
+
                         <div className="hero-badge">
+
                             <span className="badge-dot"></span>
+
                             AI-POWERED CAREER PREPARATION
+
                         </div>
 
 
                         <h1>
+
                             Prepare Smarter.
+
                             <br />
 
                             <span>
                                 Interview Better.
                             </span>
+
                         </h1>
 
 
                         <p className="hero-description">
+
                             Analyze your resume against any job description,
                             discover your skill gaps, and prepare for interviews
                             with personalized AI-powered guidance.
+
                         </p>
 
 
                         <div className="hero-actions">
+
 
                             <button
                                 className="primary-action"
@@ -176,21 +82,29 @@ const Dashboard = () => {
                                     )
                                 }
                             >
+
                                 Generate Interview Report
-                                <span>→</span>
+
+                                <span>
+                                    →
+                                </span>
+
                             </button>
 
 
                             <button
                                 className="secondary-action"
                                 onClick={() =>
-                                    handleProtectedNavigation(        //need api
-                                       "/all-report"
+                                    handleProtectedNavigation(
+                                        "/all-report"
                                     )
                                 }
                             >
+
                                 View My Reports
+
                             </button>
+
 
                         </div>
 
@@ -202,6 +116,7 @@ const Dashboard = () => {
                 {/* ================= FEATURES ================= */}
 
                 <section className="features-section">
+
 
                     <div className="section-heading">
 
@@ -309,6 +224,7 @@ const Dashboard = () => {
 
                 <section className="bottom-cta">
 
+
                     <div className="cta-content">
 
                         <span>
@@ -334,9 +250,15 @@ const Dashboard = () => {
                             )
                         }
                     >
+
                         Start Preparing
-                        <span>→</span>
+
+                        <span>
+                            →
+                        </span>
+
                     </button>
+
 
                 </section>
 
@@ -358,50 +280,10 @@ const Dashboard = () => {
 
             </footer>
 
-                    {/* This code is part of logout button */}
 
-
-        {showLogoutPopup && (
-            <div
-                className="logout-modal-overlay"
-                onClick={() => setShowLogoutPopup(false)}
-            >
-                <div
-                    className="logout-modal"
-                    onClick={(e) => e.stopPropagation()}
-                >
-                    <div className="logout-modal-icon">
-                        !
-                    </div>
-
-                    <h2>Logout?</h2>
-
-                    <p>
-                        Are you sure you want to logout from SkillGaps?
-                    </p>
-
-                    <div className="logout-modal-actions">
-
-                        <button
-                            className="cancel-logout-btn"
-                            onClick={() => setShowLogoutPopup(false)}
-                        >
-                            Cancel
-                        </button>
-
-                        <button
-                            className="confirm-logout-btn"
-                            onClick={handleLogoutFunction}
-                        >
-                            Confirm
-                        </button>
-
-                    </div>
-                </div>
-            </div>
-        )}
         </div>
     );
 };
+
 
 export default Dashboard;

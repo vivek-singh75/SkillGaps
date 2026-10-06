@@ -24,7 +24,7 @@ const Register = () => {
   return (
     <main>
         <div className="form-Container">
-            <h1>Register</h1>
+            <h1 className='top-heading'>Register</h1>
 
             <form>
                 <div className="input-group">
