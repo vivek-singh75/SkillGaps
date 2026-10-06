@@ -103,7 +103,7 @@ const AllReports = () => {
             </div>
 
             <button className="view_btn"
-            onClick={handleViewReport(report._id)}
+            onClick={() => handleViewReport(report._id)}
             >
               View Report
             </button>

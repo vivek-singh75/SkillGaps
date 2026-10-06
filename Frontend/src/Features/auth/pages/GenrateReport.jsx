@@ -38,7 +38,7 @@ const Home = () => {
     const showRecentReports = async () =>{
       try {
         const data = await getReports();
-        setAllData(data)
+        setAllData(data.reportData)
            
       } catch (error) {
         console.log(`Error while fetching all data ${error}`)
