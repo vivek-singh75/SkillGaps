@@ -19,8 +19,8 @@ const AllReports = () => {
 
         console.log("Reports response:", data);
 
-        setReports(data.reportData || []);
-        setUserDetails(data.userDetails || null);
+        setReports(data?.reportData || []);
+        setUserDetails(data?.userDetails || null);
       } catch (error) {
         console.log(`getReports failed: ${error}`);
         setReports([]);
@@ -31,12 +31,12 @@ const AllReports = () => {
     fetchReports();
   }, []);
 
-  const handleViewReport = async()=>{
+  const handleViewReport = async(reportId)=>{
     try {
       const data  = reports
       
       console.log(`data is ${data}`)
-      navigate(`/interview/${ data[0]._id }`) 
+      navigate(`/interview/${reportId}`) 
 
     } catch (error) {
       console.log(`error _id not availble ${error}`)
@@ -103,7 +103,7 @@ const AllReports = () => {
             </div>
 
             <button className="view_btn"
-            onClick={handleViewReport}
+            onClick={handleViewReport(report._id)}
             >
               View Report
             </button>
