@@ -5,7 +5,7 @@ import { InterviewContext } from "../../interview/Interview.context.jsx"
 
 export const useInterview =  () => {
     const context = useContext(InterviewContext);
-
+    
     if(!context){
         throw new Error("useInterview must be in InterviewProvider"); 
     }
@@ -73,8 +73,8 @@ export const useInterview =  () => {
         try {
             const response = await getAllInterviewReports();
 
-            const interviewReports = response.interviewReport;
-            const userDetails=  response.userDetails;
+            const interviewReports = response?.interviewReport;
+            const userDetails=  response?.userDetails;
 
             const reportData = interviewReports.map((report) => ({
                 _id: report._id,
@@ -84,9 +84,10 @@ export const useInterview =  () => {
                 createdAt: report.createdAt
             }));
 
-            // console.log("FULL RESPONSE:", response);
-            // console.log("USER DETAILS:", response?.userDetails);
-            // console.log("INTERVIEW REPORT:", response?.interviewReport);
+            console.log("FULL RESPONSE:", response);
+            console.log("USER DETAILS:", response?.userDetails);
+            console.log("INTERVIEW REPORT:", response?.interviewReport);
+
             setReports(reportData);
 
             return{ 
