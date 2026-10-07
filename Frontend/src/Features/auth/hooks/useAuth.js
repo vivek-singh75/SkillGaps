@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../services/auth.context";
-import { register, login , logout , getMe } from "../services/auth.api";
+import { register, login , logout , getMe , deleteAccount} from "../services/auth.api";
 import { useNavigate } from "react-router-dom";
 
 export  const useAuth = ()=>{
@@ -76,7 +76,26 @@ export  const useAuth = ()=>{
         
        
     }
-    return {user, loading , handleLogin ,handleRegister ,handleLogout }
+
+
+    const handleDeleteAccount = async () => {
+        setLoading(true);
+        try {
+            const data = await deleteAccount()
+            setUser(null)
+
+        } catch (error) {
+            throw Error(`delete account give error in useAuth ${error}`);
+            
+        } finally{
+            setLoading(false)
+        }
+    }
+
+
+
+
+    return {user, loading , handleLogin ,handleRegister ,handleLogout , handleDeleteAccount }
 }
 
 

@@ -122,7 +122,9 @@ const Navbar = () => {
           {/* ================= LOGGED IN ================= */}
           {user && (
             <>
-              <div className="user-info">
+              <button onClick={()=> navigate("/profile")}  
+              type="button" className="user-info"
+              >
 
                 <div className="user-avatar">
                   {user.username?.charAt(0)?.toUpperCase() || "U"}
@@ -132,7 +134,7 @@ const Navbar = () => {
                   {user.username}
                 </span>
 
-              </div>
+              </button>
 
               <button
                 type="button"

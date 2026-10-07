@@ -14,6 +14,8 @@ router.get("/logout" , authController.logoutController);
 
 router.get("/getMe" ,  authController.getMe);
 
+router.delete("/delete" ,authMiddleware.authUser,  authController.deleteAccController)
+
 
 module.exports = router;
 

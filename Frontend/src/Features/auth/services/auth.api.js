@@ -57,3 +57,17 @@ export async function getMe() {
         throw error;
     }
 }
+
+
+export async function deleteAccount() {
+    try {
+        const response = await api.delete("/api/auth/delete");
+
+        return response.data;
+
+    } catch (error) {
+
+        throw new Error(`delete account api give a error  ${error}`);
+        
+    }
+}

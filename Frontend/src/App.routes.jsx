@@ -10,6 +10,7 @@ import Interview from "./Features/auth/pages/Interview.jsx";
 import ResumeGenerator from "./Features/auth/pages/ResumeGenerator.jsx";
 import Dashboard from "./Features/auth/pages/Dashboard.jsx";
 import AllReports from "./Features/auth/pages/AllReports.jsx";
+import Profile from "./Features/auth/pages/Profile.jsx";
 
 import  Navbar   from "./Features/auth/components/navbar/Navbar.jsx"
 
@@ -91,5 +92,15 @@ export const router = createHashRouter([
       </Protected>
     ),
   },
+ {
+  path: "/profile",
+  element: (
+    <Protected>
+      <MainLayout>
+        <Profile />
+      </MainLayout>
+    </Protected>
+  ),
+},
 
 ]);

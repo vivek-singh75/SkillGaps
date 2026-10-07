@@ -1,5 +1,6 @@
 const userModel = require('../models/userModel');
-const tokenBlackListModel =  require("../models/blacklist.model")
+const tokenBlackListModel =  require("../models/blacklist.model");
+const interviewReportModel = require("../models/interviewReport.model")
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const config = require("../config/config");
@@ -135,6 +136,8 @@ async function logoutController(req, res) {
         });
     }
 }
+
+
 async function getMe(req, res) {
     try {
         const token = req.cookies?.token;
@@ -183,9 +186,49 @@ async function getMe(req, res) {
     }
 }
 
+
+async function deleteAccController(req , res) {
+    const user = req.user.userId
+
+    try {
+        if(!user){
+        return res.status(501).json({
+            message : "user not availble"
+        });
+    }
+        const userdata = await userModel.findByIdAndDelete(user);
+
+        const userInterviewReport  = await interviewReportModel.deleteMany({user: user});
+
+        return res.status(200).json({
+            success : true,
+            message : "deleted user data",
+            
+        });
+
+    } catch (error) {
+        console.log(`account deletion failed with ${error}`);
+
+        res.status(500).json({
+            success : false,
+            message : "account deletion failed"
+        });
+    }
+    
+}
+
+
+
+
+
+
+
+
+
 module.exports = {
     registerUserController,
     loginController,
     logoutController,
-    getMe
+    getMe,
+    deleteAccController
 }
