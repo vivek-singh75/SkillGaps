@@ -187,12 +187,111 @@ async function getMe(req, res) {
 }
 
 
+async function updateUserDetails(req, res) {
+  try {
+    const userId = req.user.userId;
+
+    const { username, email } = req.body;
+
+    const user = await userModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    // Email change ho raha hai
+    if (email && email !== user.email) {
+
+      const existingUser = await userModel.findOne({
+        email: email.toLowerCase(),
+        _id: { $ne: userId },
+      });
+
+      if (existingUser) {
+        return res.status(409).json({
+          message: "Email is already registered with another account",
+        });
+      }
+    }
+
+    user.username = username ?? user.username;
+    user.email = email
+      ? email.toLowerCase()
+      : user.email;
+
+    await user.save();
+
+    return res.status(200).json({
+        success : true,
+      message: "User details updated successfully",
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+      },
+    });
+
+  } catch (error) {
+    console.error("Update user error:", error);
+
+    return res.status(500).json({
+      message: "Failed to update user details",
+      success: false
+    });
+  }
+};
+
+
+async function updateUserpassword(req , res) {
+    const user = req.user;
+
+    const {newPassword ,currentPassword ,confirmPassword} = req.body;
+
+    
+    if(!user){
+        return res.status(500).json({
+            message : "user details not availble"
+        });
+    }
+
+    if(newPassword !==confirmPassword){
+        return res.status(403).json({
+            message : "newPassword and confirmPassword are not same"
+        });
+    }
+
+    const userDetails =await userModel.findById(user.userId);
+
+    const isCurrentPasswordValid = await bcrypt.compare(currentPassword , userDetails.password);
+    
+    if(!isCurrentPasswordValid){
+        return res.status(409).json({message : "password is inValid"});
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    const passwordUpdated = await userModel.findByIdAndUpdate(user.userId,
+        {
+            password : hashedPassword  
+        }
+    );
+
+    
+    return res.status(206).json({
+        message : "password changed successfully",
+    })
+
+}
+
+
 async function deleteAccController(req , res) {
     const user = req.user.userId
 
     try {
         if(!user){
-        return res.status(501).json({
+        return res.status(404).json({
             message : "user not availble"
         });
     }
@@ -230,5 +329,7 @@ module.exports = {
     loginController,
     logoutController,
     getMe,
-    deleteAccController
+    deleteAccController,
+    updateUserDetails,
+    updateUserpassword
 }

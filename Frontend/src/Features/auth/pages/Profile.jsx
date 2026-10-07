@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import "../../../style/Profile.scss";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const { user } = useAuth();
+  const navigate = useNavigate()
+  const { user , handleUpdateUserDetails , handleUpdateUserPassword , handleDeleteUserAccount} = useAuth();
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -67,18 +69,12 @@ const Profile = () => {
 
   const handleSaveProfile = async () => {
     try {
-      /*
-        TODO:
-        Call your update profile API here.
-
-        Example:
-
-        await updateProfile(profileData);
-      */
-
+      await handleUpdateUserDetails(profileData)
+    
       console.log("Updated profile:", profileData);
 
       setIsEditing(false);
+
     } catch (error) {
       console.error("Profile update failed:", error);
     }
@@ -126,12 +122,9 @@ const Profile = () => {
     }
 
     try {
+      await handleUpdateUserPassword(passwordData)
       /*
-        TODO:
-        Call your change password API here.
-
         Example:
-
         await changePassword(passwordData);
       */
 
@@ -143,7 +136,7 @@ const Profile = () => {
         confirmPassword: "",
       });
 
-      alert("Password changed successfully.");
+      //alert("Password changed successfully.");
     } catch (error) {
       console.error("Password change failed:", error);
     }
@@ -175,6 +168,7 @@ const Profile = () => {
     }
 
     try {
+      await handleDeleteUserAccount({password: deletePassword})
       /*
         IMPORTANT:
 
@@ -193,7 +187,8 @@ const Profile = () => {
       console.log("Delete account with password:", deletePassword);
 
       // After successful API response:
-      // navigate("/login");
+      alert("Account deleted")
+      navigate("/");
 
       closeDeleteModal();
 

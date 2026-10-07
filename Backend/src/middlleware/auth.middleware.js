@@ -18,10 +18,10 @@ async function authUser(req , res , next) {
             message : "cookie is not valid  "
         }); 
     }
-    try {
-        const decoded = jwt.verify(token , process.env.JWT_KEY  );
-        req.user = decoded;
 
+    try {
+        const decoded = jwt.verify(token , process.env.JWT_KEY);
+        req.user = decoded;
 
         next()
 

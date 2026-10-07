@@ -59,7 +59,31 @@ export async function getMe() {
 }
 
 
-export async function deleteAccount() {
+export async function updateUserDetails(updatDetails) {
+   
+    const response = await api.patch("/api/auth/updatDetails", {
+        username:updatDetails.username, 
+        email : updatDetails.email
+    });
+
+    return response.data
+   
+}
+
+export async function updateUserPassword(passwordData) {
+
+    const response = await api.patch("/api/auth/updatepass", {
+        currentPassword: passwordData.currentPassword,
+        confirmPassword:passwordData.confirmPassword, 
+        newPassword: passwordData.newPassword
+    });
+
+    return response.data
+
+}
+
+
+export async function deleteAccount(password) {
     try {
         const response = await api.delete("/api/auth/delete");
 

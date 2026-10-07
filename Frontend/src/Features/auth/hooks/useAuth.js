@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../services/auth.context";
-import { register, login , logout , getMe , deleteAccount} from "../services/auth.api";
+import { register, login , logout , getMe , deleteAccount, updateUserDetails ,updateUserPassword} from "../services/auth.api";
 import { useNavigate } from "react-router-dom";
 
 export  const useAuth = ()=>{
@@ -77,11 +77,50 @@ export  const useAuth = ()=>{
        
     }
 
+    const handleUpdateUserDetails = async (updatDetails)=>{
 
-    const handleDeleteAccount = async () => {
+        setLoading(true);
+        
+        try {
+            const data = await updateUserDetails(updatDetails);
+            setUser(data.user)
+            alert(data.message)
+           
+        } catch (error) {
+            alert(
+                error.response?.data?.message || "Something went wrong"
+            );
+
+        } finally{
+            setLoading(false)
+            
+        } 
+    }
+    const handleUpdateUserPassword = async (passwordData)=>{
+
+        setLoading(true);
+        
+        try {
+            const data = await updateUserPassword(passwordData);
+  
+            alert(data.message)
+           
+        } catch (error) {
+            alert(
+                error.response?.data?.message || "Something went wrong"
+            );
+
+        } finally{
+            setLoading(false)
+            
+        } 
+    }
+
+
+    const handleDeleteUserAccount = async (password) => {
         setLoading(true);
         try {
-            const data = await deleteAccount()
+            const data = await deleteAccount(password)
             setUser(null)
 
         } catch (error) {
@@ -95,7 +134,8 @@ export  const useAuth = ()=>{
 
 
 
-    return {user, loading , handleLogin ,handleRegister ,handleLogout , handleDeleteAccount }
+    return {user, loading , handleLogin ,handleRegister ,handleLogout ,
+        handleUpdateUserDetails,handleUpdateUserPassword, handleDeleteUserAccount }
 }
 
 
