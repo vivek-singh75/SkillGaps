@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:3000",  //for production
-    //baseURL: "https://skillgaps.onrender.com",
+    //baseURL: "http://localhost:3000",  //for production
+    baseURL: "https://skillgaps.onrender.com",
     withCredentials: true
 })
 
