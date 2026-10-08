@@ -117,13 +117,20 @@ export  const useAuth = ()=>{
     }
 
 
-    const handleDeleteUserAccount = async (password) => {
+    const handleDeleteUserAccount = async (deletePassword) => {
         setLoading(true);
         try {
-            const data = await deleteAccount(password)
-            setUser(null)
+            const data = await deleteAccount(deletePassword);
+
+            setUser(null);
+
+            alert(data.message);
 
         } catch (error) {
+
+            alert(
+                error.response?.data?.message || "Something went wrong"
+            );
             throw Error(`delete account give error in useAuth ${error}`);
             
         } finally{

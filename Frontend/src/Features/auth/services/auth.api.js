@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-    //baseURL: "http://localhost:3000",  //for production
-    baseURL: "https://skillgaps.onrender.com",
+    baseURL: "http://localhost:3000",  //for production
+    //baseURL: "https://skillgaps.onrender.com",
     withCredentials: true
 })
 
@@ -83,15 +83,13 @@ export async function updateUserPassword(passwordData) {
 }
 
 
-export async function deleteAccount(password) {
-    try {
-        const response = await api.delete("/api/auth/delete");
+export async function deleteAccount(deletePassword) {
+    
+    const response = await api.delete("/api/auth/delete", {
+        data : {
+            password : deletePassword
+        }
+    } );
 
-        return response.data;
-
-    } catch (error) {
-
-        throw new Error(`delete account api give a error  ${error}`);
-        
-    }
+    return response.data;
 }

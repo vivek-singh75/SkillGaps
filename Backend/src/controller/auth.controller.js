@@ -1,3 +1,4 @@
+const mongoose = require("mongoose")
 const userModel = require('../models/userModel');
 const tokenBlackListModel =  require("../models/blacklist.model");
 const interviewReportModel = require("../models/interviewReport.model")
@@ -286,36 +287,94 @@ async function updateUserpassword(req , res) {
 }
 
 
-async function deleteAccController(req , res) {
-    const user = req.user.userId
+async function deleteAccController(req, res) {
 
     try {
-        if(!user){
-        return res.status(404).json({
-            message : "user not availble"
-        });
-    }
-        const userdata = await userModel.findByIdAndDelete(user);
+        const user = req.user.userId;
+        const { password } = req.body;
 
-        const userInterviewReport  = await interviewReportModel.deleteMany({user: user});
+        if (!user) {
+            return res.status(404).json({
+                message: "User not available"
+            });
+        }
+
+        if (!password) {
+            return res.status(400).json({
+                message: "Please enter your password"
+            });
+        }
+
+        const userDetails = await userModel.findById(user);
+
+        if (!userDetails) {
+            return res.status(404).json({
+                message: "User details not found"
+            });
+        }
+
+        const isCurrentPasswordValid = await bcrypt.compare(
+            password,
+            userDetails.password
+        );
+
+        if (!isCurrentPasswordValid) {
+            return res.status(401).json({
+                message: "Password is invalid or incorrect"
+            });
+        }
+
+        /*=====================================
+          MongoDB Transaction
+        =====================================*/
+
+        const session = await mongoose.startSession();
+
+        try {
+            session.startTransaction();
+
+            // Delete all interview reports
+            await interviewReportModel.deleteMany(
+                { user: user },
+                { session }
+            );
+
+            // Delete user
+            await userModel.findByIdAndDelete(
+                user,
+                { session }
+            );
+
+            // Commit transaction
+            await session.commitTransaction();
+
+        } catch (error) {
+
+            // Rollback everything
+            await session.abortTransaction();
+
+            // Send error to outer catch
+            throw error;
+
+        } finally {
+            session.endSession();
+        }
 
         return res.status(200).json({
-            success : true,
-            message : "deleted user data",
-            
+            success: true,
+            message: "Account deleted successfully"
         });
 
     } catch (error) {
-        console.log(`account deletion failed with ${error}`);
 
-        res.status(500).json({
-            success : false,
-            message : "account deletion failed"
+        console.error("Account deletion failed:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Account deletion failed"
         });
     }
-    
 }
-
 
 
 

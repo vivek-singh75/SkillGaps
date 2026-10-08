@@ -167,27 +167,13 @@ const Profile = () => {
       return;
     }
 
+    console.log(deletePassword)
+
     try {
-      await handleDeleteUserAccount({password: deletePassword})
-      /*
-        IMPORTANT:
-
-        Send deletePassword to your backend.
-
-        Example:
-
-        await deleteAccount({
-          password: deletePassword
-        });
-
-        Backend should verify the password
-        before deleting the account.
-      */
-
-      console.log("Delete account with password:", deletePassword);
+      await handleDeleteUserAccount(deletePassword)
 
       // After successful API response:
-      alert("Account deleted")
+      // alert("Account deleted")
       navigate("/");
 
       closeDeleteModal();
@@ -195,10 +181,12 @@ const Profile = () => {
     } catch (error) {
       console.error("Account deletion failed:", error);
 
-      alert(
-        error?.response?.data?.message ||
-        "Unable to delete account. Please check your password."
-      );
+      
+      // alert(
+      //   error?.response?.data?.message ||
+      //   "Unable to delete account. Please check your password."
+      // );
+
     }
   };
 
