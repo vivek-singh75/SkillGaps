@@ -8,7 +8,7 @@ import Loading from "../components/loadingAnimation/Loading.jsx";
 
 const Home = () => {
 
-  const { loading , reports,  generateReport ,getReportById , getReports} = useInterview();
+  const { loading ,  setLoading, reports,  generateReport ,getReportById , getReports} = useInterview();
 
   const navigate = useNavigate()
 
@@ -35,7 +35,7 @@ const Home = () => {
     } catch (error) {
 
       return <main><h2>Failed ,  Try Again </h2></main>
-      
+
     }
   }
 
