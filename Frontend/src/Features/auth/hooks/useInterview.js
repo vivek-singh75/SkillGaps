@@ -30,8 +30,11 @@ export const useInterview =  () => {
             };
 
             setReport(reportData);
+
             return reportData;
+
         } catch (error) {
+            
             console.error("Generate interview report error:", error);
             throw error;
 

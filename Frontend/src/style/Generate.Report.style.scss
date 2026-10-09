@@ -980,3 +980,50 @@
     font-size: 14px;
   }
 }
+
+
+
+
+
+
+
+/* =========================================
+   RESUME DRAG & DROP ANIMATION
+========================================= */
+
+.resume-drop {
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* Dragging state */
+
+.resume-drop.dragging {
+  transform: scale(1.02);
+  border-style: dashed;
+
+  animation: resumeDragPulse 1s ease-in-out infinite;
+}
+
+
+/* Pulse animation */
+
+@keyframes resumeDragPulse {
+
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
+}

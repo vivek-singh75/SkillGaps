@@ -19,6 +19,7 @@ const resumeContent = pdfData.text;
 await parser.destroy();
     const {selfDescription ,  jobDescription} = req.body
 
+    selfDescription = selfDescription || "take all information from resume"
     const interviewReportByAi = await generateInterviewReport({
         resume : resumeContent,
         selfDescription,
