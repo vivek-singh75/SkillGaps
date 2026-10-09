@@ -19,24 +19,33 @@ const Home = () => {
 
 
   const handleInterviewReports = async ()=>{
+
+    setLoading(true)
+
     const resumeFile = resume.current.files[0]
    
     try {
+
       const data = await generateReport({jobDescription , selfDescription , resumeFile});
 
       navigate(`/interview/${ data._id }`) 
 
       setLoading(false)
+
     } catch (error) {
 
       return <main><h2>Failed ,  Try Again </h2></main>
+      
     }
   }
 
 
  useEffect(()=>{
+
     const showRecentReports = async () =>{
+
       try {
+
         const data = await getReports();
         setAllData(data.reportData)
            
