@@ -10,6 +10,7 @@
   "keywords": [],
   "type": "commonjs",
   "dependencies": {
+    "@getbrevo/brevo": "^6.2.0",
     "@google/genai": "^2.22.0",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
@@ -19,7 +20,6 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.10.0",
     "multer": "^2.4.0",
-    "nodemailer": "^10.2.1",
     "pdf-parse": "^2.4.5",
     "puppeteer": "^25.11.0",
     "zod": "^4.6.5",
