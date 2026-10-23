@@ -13,7 +13,7 @@ import AllReports from "./Features/auth/pages/AllReports.jsx";
 import Profile from "./Features/auth/pages/Profile.jsx";
 
 import  Navbar   from "./Features/auth/components/navbar/Navbar.jsx"
-
+import VerifyEmail from "./Features/auth/pages/VerifyEmail.jsx";
 
 export const router = createHashRouter([
 
@@ -31,6 +31,12 @@ export const router = createHashRouter([
     element: <Register />,
   },
 
+  {
+    path: "/verify-email",
+    element: <VerifyEmail />,
+  },
+
+
   // ==========================================
   // PUBLIC DASHBOARD + NAVBAR
   // ==========================================
@@ -44,6 +50,7 @@ export const router = createHashRouter([
       </>
     ),
   },
+
 
   // ==========================================
   // PROTECTED
@@ -92,15 +99,16 @@ export const router = createHashRouter([
       </Protected>
     ),
   },
- {
-  path: "/profile",
-  element: (
-    <Protected>
-      <MainLayout>
-        <Profile />
-      </MainLayout>
-    </Protected>
-  ),
-},
+
+  {
+    path: "/profile",
+    element: (
+      <Protected>
+        <MainLayout>
+          <Profile />
+        </MainLayout>
+      </Protected>
+    ),
+  },
 
 ]);

@@ -22,6 +22,37 @@ export async function register(username ,email ,  password) {
 }
 
 
+export async function resendEmail(email) {
+    try {
+        const response = await api.post('/api/auth/resendEmail',
+            {
+                email
+            });
+
+       return response.data ;
+        
+
+    } catch (error) {
+        console.log(`error in resend email ${error}`);
+        throw error;
+    }
+}
+
+
+export async function verifyEmail(token) {
+    try {
+        const response = await api.get(
+            `/api/auth/verifyEmail?token=${encodeURIComponent(token)}`
+        );
+
+        return response.data;
+
+    } catch (error) {
+        console.log("Error in verify email:", error);
+        throw error;
+    }
+}
+
 
 export async function login(email ,  password) {
     try {
@@ -36,6 +67,7 @@ export async function login(email ,  password) {
     }
 }
 
+
 export async function logout() {
     try {
         const response = await api.get('/api/auth/logout');
@@ -46,6 +78,7 @@ export async function logout() {
         console.log(`error in frontend logout api call ${error}`)
     }
 }
+
 
 export async function getMe() {
     try {
@@ -69,6 +102,7 @@ export async function updateUserDetails(updatDetails) {
     return response.data
    
 }
+
 
 export async function updateUserPassword(passwordData) {
 

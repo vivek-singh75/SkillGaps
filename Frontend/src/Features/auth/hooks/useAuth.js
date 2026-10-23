@@ -1,12 +1,55 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../services/auth.context";
-import { register, login , logout , getMe , deleteAccount, updateUserDetails ,updateUserPassword} from "../services/auth.api";
+import { register, verifyEmail, resendEmail, login , logout , getMe , deleteAccount, updateUserDetails ,updateUserPassword} from "../services/auth.api";
 import { useNavigate } from "react-router-dom";
 
 export  const useAuth = ()=>{
     const context = useContext(AuthContext)
     const {user , setUser , loading , setLoading} = context
     const navigate = useNavigate()
+
+    const handleRegister = async ({username ,  email , password}) =>{
+        setLoading(true)
+        try {
+            const data = await register(username , email , password);
+            setUser(data.user)
+
+        } catch (error) {
+            
+        } finally{
+            setLoading(false)
+        }
+    }
+
+    const handleVerifyEmail = async (token) => {
+
+        try {
+
+            setLoading(true);
+
+            const response = await verifyEmail(token);
+
+            return response;
+
+        } finally {
+
+            setLoading(false);
+        }
+    };
+
+
+   const handleResendEmail = async (email) => {
+        try {
+            setLoading(true);
+
+            const response = await resendEmail(email);
+
+            return response;
+
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleLogin =async ({email , password})=>{
 
@@ -24,19 +67,7 @@ export  const useAuth = ()=>{
             setLoading(false)
         } 
     }
-    const handleRegister = async ({username ,  email , password}) =>{
-        setLoading(true)
-        try {
-            const data = await register(username , email , password);
-            setUser(data.user)
-
-        } catch (error) {
-            
-        } finally{
-            setLoading(false)
-        }
-    }
-
+    
     
     useEffect(() => {
         const getUserAndSet = async () => {
@@ -96,6 +127,8 @@ export  const useAuth = ()=>{
             
         } 
     }
+
+
     const handleUpdateUserPassword = async (passwordData)=>{
 
         setLoading(true);
@@ -141,7 +174,7 @@ export  const useAuth = ()=>{
 
 
 
-    return {user, loading , handleLogin ,handleRegister ,handleLogout ,
+    return {user, loading , handleLogin ,handleRegister ,handleVerifyEmail, handleResendEmail ,handleLogout ,
         handleUpdateUserDetails,handleUpdateUserPassword, handleDeleteUserAccount }
 }
 

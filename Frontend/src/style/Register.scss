@@ -1,0 +1,571 @@
+.form-Container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 10px 0 15px;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.top-heading {
+    margin: 0 0 18px;
+
+    text-align: center;
+
+    font-size: 42px;
+    font-weight: 700;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-Container form {
+    width: 100%;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 14px;
+}
+
+.input-group label {
+    margin-bottom: 6px;
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.input-group input {
+    width: 100%;
+    height: 52px;
+
+    padding: 0 20px;
+
+    border: none;
+    border-radius: 15px;
+
+    background: #080b11;
+    color: #ffffff;
+
+    outline: none;
+
+    font-size: 16px;
+}
+
+.input-group input::placeholder {
+    color: #60708a;
+}
+
+.input-group input:focus {
+    box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.5);
+}
+
+
+/* =========================
+   REGISTER BUTTON
+========================= */
+
+.primary-button {
+    width: 100%;
+    height: 50px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: linear-gradient(
+        90deg,
+        #6366f1,
+        #8b5cf6
+    );
+
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.primary-button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 20px rgba(124, 92, 255, 0.3);
+}
+
+.primary-button:active {
+    transform: translateY(0);
+}
+
+.primary-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   LOGIN TEXT
+========================= */
+
+.form-Container > p {
+    margin: 12px 0 0;
+
+    text-align: center;
+
+    font-size: 13px;
+    color: #8c8c8c;
+}
+
+.form-Container > p a {
+    color: #8b5cf6;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.form-Container > p a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   RESEND SECTION
+========================= */
+
+.resend-section {
+    margin-top: 14px;
+
+    text-align: center;
+}
+
+.resend-section p {
+    margin: 0 0 5px;
+
+    font-size: 13px;
+    color: #8c8c8c;
+}
+
+.resend-email-button {
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    color: #8b5cf6;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.resend-email-button:hover {
+    color: #a78bfa;
+    text-decoration: underline;
+}
+
+
+/* =========================
+   RESEND MODAL OVERLAY
+========================= */
+
+.resend-modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    z-index: 9999;
+}
+
+
+/* =========================
+   RESEND MODAL
+========================= */
+
+.resend-modal {
+    position: relative;
+
+    width: 100%;
+    max-width: 420px;
+
+    padding: 28px 25px;
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+
+    background: #202020;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5);
+
+    animation: resendModalOpen 0.2s ease-out;
+}
+
+@keyframes resendModalOpen {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =========================
+   MODAL CLOSE BUTTON
+========================= */
+
+.modal-close {
+    position: absolute;
+
+    top: 9px;
+    right: 12px;
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #aaa;
+
+    font-size: 25px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.modal-close:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   MODAL HEADING
+========================= */
+
+.resend-modal h2 {
+    margin: 0 35px 7px 0;
+
+    color: #fff;
+
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.resend-modal > p {
+    margin: 0 0 18px;
+
+    color: #999;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   MODAL INPUT
+========================= */
+
+.resend-modal .input-group {
+    margin-bottom: 15px;
+}
+
+.resend-modal .input-group label {
+    margin-bottom: 7px;
+
+    color: #ddd;
+
+    font-size: 14px;
+}
+
+.resend-modal .input-group input {
+    height: 50px;
+
+    padding: 0 16px;
+
+    border-radius: 11px;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   RESEND ERROR
+========================= */
+
+.resend-error {
+    margin: 8px 0 12px;
+
+    padding: 8px 10px;
+
+    border-radius: 7px;
+
+    background: rgba(239, 68, 68, 0.08);
+
+    color: #f87171;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+
+/* =========================
+   RESEND SUCCESS
+========================= */
+
+.resend-success {
+    margin: 8px 0 12px;
+
+    padding: 8px 10px;
+
+    border-radius: 7px;
+
+    background: rgba(34, 197, 94, 0.08);
+
+    color: #4ade80;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+
+/* =========================
+   RESEND LIMIT
+========================= */
+
+.resend-limit {
+    margin: 10px 0 4px;
+
+    text-align: center;
+
+    color: #999;
+
+    font-size: 12px;
+}
+
+.resend-limit strong {
+    color: #fff;
+}
+
+
+/* =========================
+   COOLDOWN
+========================= */
+
+.resend-cooldown {
+    margin: 0 0 10px;
+
+    text-align: center;
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+.resend-cooldown strong {
+    color: #a78bfa;
+}
+
+
+/* =========================
+   MODAL BUTTON
+========================= */
+
+.resend-modal .primary-button {
+    height: 50px;
+
+    border-radius: 11px;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .form-Container {
+        width: calc(100% - 40px);
+        max-width: 400px;
+
+        padding: 8px 0 10px;
+    }
+
+    .top-heading {
+        margin-bottom: 12px;
+
+        font-size: 34px;
+    }
+
+    .input-group {
+        margin-bottom: 10px;
+    }
+
+    .input-group label {
+        margin-bottom: 5px;
+
+        font-size: 14px;
+    }
+
+    .input-group input {
+        height: 48px;
+
+        padding: 0 16px;
+
+        border-radius: 13px;
+
+        font-size: 14px;
+    }
+
+    .primary-button {
+        height: 46px;
+
+        border-radius: 11px;
+
+        font-size: 15px;
+    }
+
+    .resend-section {
+        margin-top: 10px;
+    }
+
+    .resend-section p {
+        margin-bottom: 4px;
+
+        font-size: 12px;
+    }
+
+    .resend-email-button {
+        font-size: 12px;
+    }
+
+    .form-Container > p {
+        margin-top: 9px;
+
+        font-size: 12px;
+    }
+
+
+    /* =====================
+       MOBILE MODAL
+    ===================== */
+
+    .resend-modal {
+        max-width: 360px;
+
+        padding: 23px 18px;
+    }
+
+    .resend-modal h2 {
+        font-size: 20px;
+    }
+
+    .resend-modal > p {
+        margin-bottom: 15px;
+
+        font-size: 12px;
+    }
+
+    .resend-modal .input-group {
+        margin-bottom: 12px;
+    }
+
+    .resend-modal .input-group label {
+        font-size: 13px;
+    }
+
+    .resend-modal .input-group input {
+        height: 48px;
+
+        font-size: 14px;
+    }
+
+    .resend-modal .primary-button {
+        height: 46px;
+
+        font-size: 14px;
+    }
+}
+
+
+/* =========================
+   SMALL HEIGHT MOBILE
+========================= */
+
+@media (max-height: 700px) and (max-width: 700px) {
+
+    .form-Container {
+        padding-top: 5px;
+        padding-bottom: 8px;
+    }
+
+    .top-heading {
+        margin-bottom: 8px;
+
+        font-size: 30px;
+    }
+
+    .input-group {
+        margin-bottom: 8px;
+    }
+
+    .input-group label {
+        margin-bottom: 4px;
+
+        font-size: 13px;
+    }
+
+    .input-group input {
+        height: 44px;
+    }
+
+    .primary-button {
+        height: 44px;
+    }
+
+    .resend-section {
+        margin-top: 8px;
+    }
+
+    .form-Container > p {
+        margin-top: 7px;
+    }
+}
