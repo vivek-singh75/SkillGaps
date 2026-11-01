@@ -8,17 +8,12 @@ const api = axios.create({
 
 
 export async function register(username ,email ,  password) {
-    try {
         const response  = await api.post('/api/auth/register',
             {
                 username , email , password
             });
         
         return response.data
-
-    } catch (error) {
-        console.log(`error in frontend register api call ${error}`)
-    }
 }
 
 

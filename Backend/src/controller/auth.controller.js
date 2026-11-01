@@ -21,7 +21,7 @@ async function registerUserController(req, res) {
 
         if (!username || !email || !password) {
             return res.status(400).json({
-                message: "Enter all details"
+                message: "Enter All Details"
             });
         }
 
@@ -34,7 +34,7 @@ async function registerUserController(req, res) {
             // User exists but has not verified email
             if (!existingUser.isVerified) {
                 return res.status(403).json({
-                    message: "Account already exists but email is not verified",
+                    message: "Account Already Exists But Email is Not Verified",
                     needsVerification: true,
                     email: existingUser.email
                 });
@@ -79,7 +79,7 @@ async function registerUserController(req, res) {
         );
 
         return res.status(201).json({
-            message: "Account created. Please verify your email.",
+            message: "Account Created. Please Check Your Email and verify email.",
             needsVerification: true,
             user: {
                 userId: user._id,

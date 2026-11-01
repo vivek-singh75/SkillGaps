@@ -213,7 +213,7 @@ const Register = () => {
 
     try {
 
-      await handleRegister({
+      const response = await handleRegister({
 
         username: cleanUsername,
 
@@ -223,7 +223,6 @@ const Register = () => {
 
       });
 
-
       /*
         Registration successful.
 
@@ -231,9 +230,9 @@ const Register = () => {
         kyunki email verification abhi pending hai.
       */
 
-      alert(
-        "Account created successfully. Please check your email and verify your account."
-      );
+      // alert(
+      //   "Account created successfully. Please check your email and verify your account."
+      // );
 
 
     } catch (error) {
@@ -459,13 +458,14 @@ const Register = () => {
     }
   };
 
+  // =====================================
+  // SHOW AND HIDE PASSWORD 
+  // =====================================
+
   const handleShowPass = async () => {
     setShowPassword(prev => !prev)
     console.log(showPassword)
   }
-
-
-
 
 
 
