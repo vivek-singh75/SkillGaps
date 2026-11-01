@@ -616,7 +616,7 @@ const Register = () => {
               required
             />
 
-            <button className="showHide" onClick={handleShowPass}>
+            <button type="button" className="showHide" onClick={handleShowPass}>
               {showPassword ? "Hide" : "Show"}
             </button>
 
