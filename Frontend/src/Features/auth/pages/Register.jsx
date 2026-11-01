@@ -27,6 +27,7 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false)
 
 
   // =====================================
@@ -458,6 +459,15 @@ const Register = () => {
     }
   };
 
+  const handleShowPass = async () => {
+    setShowPassword(prev => !prev)
+    console.log(showPassword)
+  }
+
+
+
+
+
 
   // =====================================
   // LOADING
@@ -587,7 +597,7 @@ const Register = () => {
             <input
               id="password"
               name="password"
-              type="password"
+              type= {showPassword? "text" : "password"}
 
               value={password}
 
@@ -605,6 +615,10 @@ const Register = () => {
 
               required
             />
+
+            <button className="showHide" onClick={handleShowPass}>
+              {showPassword ? "Hide" : "Show"}
+            </button>
 
           </div>
 

@@ -12,6 +12,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false)
 
 
   const formHandler = async (e) => {
@@ -88,6 +89,13 @@ const Login = () => {
   };
 
 
+  
+  const handleShowPass = async () => {
+    setShowPassword(prev => !prev)
+    console.log(showPassword)
+  }
+
+
   if (loading) {
     return (
       <main>
@@ -142,7 +150,7 @@ const Login = () => {
             <input
               id="password"
               name="password"
-              type="password"
+              type={showPassword?"text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your Password"
@@ -150,6 +158,11 @@ const Login = () => {
               minLength={6}
               required
             />
+
+            <button className="showHide" onClick={handleShowPass}>
+              {showPassword ? "Hide" : "Show"}
+            </button>
+
 
           </div>
 
