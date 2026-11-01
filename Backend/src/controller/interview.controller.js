@@ -1,44 +1,55 @@
 const { PDFParse } = require("pdf-parse");
 const { generateInterviewReport } = require("../services/ai.services");
 const interviewReportModel = require("../models/interviewReport.model");
-const userModel = require("../models/userModel")
+const userModel = require("../models/userModel");
+const { success } = require("zod");
 
 
 
 async function interviewController(req ,res) {
+  try {
     const resumeFile = req.file
 
-const parser = new PDFParse({
-    data: req.file.buffer
-    });
+    const parser = new PDFParse({
+        data: req.file.buffer
+        });
 
-const pdfData = await parser.getText();
+    const pdfData = await parser.getText();
 
-const resumeContent = pdfData.text;
+    const resumeContent = pdfData.text;
 
-await parser.destroy();
-    const {selfDescription ,  jobDescription} = req.body
+    await parser.destroy();
+        const {  jobDescription} = req.body
+        let {selfDescription} = req.body
 
-    selfDescription = selfDescription || "take all information from resume"
-    const interviewReportByAi = await generateInterviewReport({
-        resume : resumeContent,
-        selfDescription,
-        jobDescription
-    }) 
+      selfDescription = selfDescription || "take all information from resume"
+      const interviewReportByAi = await generateInterviewReport({
+          resume : resumeContent,
+          selfDescription,
+          jobDescription
+      }) 
 
-    const interviewReport = await interviewReportModel.create({
-        user : req.user.userId,
-        resume : resumeContent,
-        selfDescription,
-        jobDescription,
-        ...interviewReportByAi
+      const interviewReport = await interviewReportModel.create({
+          user : req.user.userId,
+          resume : resumeContent,
+          selfDescription,
+          jobDescription,
+          ...interviewReportByAi
 
-    });
+      });
 
-    res.status(201).json({
-        message : "interview report generate successfully",
-        interviewReport
+      res.status(201).json({
+          message : "interview report generate successfully",
+          interviewReport
+      })
+    } catch (error) {
+      
+      return res.status(501).json({
+        success: false,
+        message : "Generation Failed"
     })
+  }
+    
 
 
 
