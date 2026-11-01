@@ -322,11 +322,12 @@ const Profile = () => {
             <div className="input-group">
 
               <label htmlFor="email">
-                Email Address
+                Email Address <b>(Change Not Allowed)</b>
               </label>
 
               {isEditing ? (
                 <input
+                disabled
                   id="email"
                   name="email"
                   type="email"

@@ -498,7 +498,7 @@ const Register = () => {
             REGISTER FORM
         ================================= */}
 
-        <form onSubmit={formHandler}>
+        <form onSubmit={formHandler}> 
 
 
           {/* ===============================

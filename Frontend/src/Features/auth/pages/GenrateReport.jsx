@@ -365,8 +365,11 @@ const Home = () => {
             <div className="resume-area">
 
               <label>
-                Upload Resume <em>(Best Results)</em>
+                Upload Resume <em><span>
+                Required
+              </span></em>
               </label>
+              
 
 
               <label
@@ -445,7 +448,7 @@ const Home = () => {
                 onChange={(e) =>
                   setSelfDescription(e.target.value)
                 }
-                placeholder="Briefly describe your experience, key skills, and years of experience if you don't have a resume handy..."
+                placeholder="Briefly describe your experience, key skills, and years of experience..."
               />
 
             </div>
@@ -464,9 +467,8 @@ const Home = () => {
 
               <p>
 
-                Either a <b>Resume</b> or a{" "}
-                <b>Self Description</b> is required to generate a
-                personalized plan.
+                
+                If You Provide <b>Resume</b> and <b>Self Description</b> then result will be more personalized.
 
               </p>
 
