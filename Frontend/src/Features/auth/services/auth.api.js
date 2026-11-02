@@ -2,6 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
     //baseURL: "http://localhost:3000",  //for production
+    //baseURL: "http://localhost:8080",  //for test
     baseURL: "https://skillgaps.onrender.com",
     withCredentials: true
 })
