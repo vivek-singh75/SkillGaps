@@ -12,7 +12,8 @@ import { useNavigate } from "react-router-dom";
 
 export  const useAuth = ()=>{
     const context = useContext(AuthContext)
-    const {user , setUser , loading , setLoading} = context
+    const {user , setUser , loading , setLoading ,  startButtonLoading,
+        stopButtonLoading, isButtonLoading} = context;
     const navigate = useNavigate()
 
     const handleRegister = async ({username ,  email , password}) =>{
@@ -265,7 +266,9 @@ export  const useAuth = ()=>{
     }
 
 
-    return {user, loading , handleLogin ,
+    return {user, loading ,
+        startButtonLoading,stopButtonLoading,
+        isButtonLoading, handleLogin ,
         handleRegister ,handleVerifyEmail, 
         handleResendEmail ,handleLogout ,
         handleUpdateUserDetails,
