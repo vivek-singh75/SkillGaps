@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-    //baseURL: "http://localhost:3000",  //for production
+    baseURL: "http://localhost:3000",  //for production
     //baseURL: "http://localhost:8080",  //for test
-    baseURL: "https://skillgaps.onrender.com",
+    //baseURL: "https://skillgaps.onrender.com",
     withCredentials: true
 })
 
@@ -33,6 +33,87 @@ export async function resendEmail(email) {
         throw error;
     }
 }
+
+// ==================
+// for reset password
+// ==================
+
+export async function verifyEmailForOTP(email) {
+    try {
+        const response = await api.post("/api/reset/verifyEmail",
+            {
+                email
+            }
+        )
+
+        return response.data
+
+
+    } catch (error) {
+        console.log(`error in resend email ${error}`);
+        throw error;
+    }
+}
+
+
+export async function verifyOTP(email , otp) {
+
+    try {
+        const response = await api.post("/api/reset/verifyOTP",
+            {
+                email , otp
+            }
+        )
+
+
+        return response.data
+
+
+    } catch (error) {
+        console.log(`error in resend email ${error}`);
+        throw error;
+    }
+}
+
+
+export async function resendOTP(email) {
+    try {
+        const response = await api.post("/api/reset/resendOTP",
+            {
+                email
+            }
+        )
+
+
+        return response.data
+
+
+    } catch (error) {
+        console.log(`error in resend email ${error}`);
+        throw error;
+    }
+}
+
+
+
+export async function updatePassword(resetToken , email , newPassword) {
+    try {
+        const response = await api.patch("/api/reset/updatePassword",
+            {
+                resetToken ,email , newPassword
+            }
+        )
+
+        return response.data
+
+
+    } catch (error) {
+        console.log(`error in resend email ${error}`);
+        throw error;
+    }
+}
+
+
 
 
 export async function verifyEmail(token) {

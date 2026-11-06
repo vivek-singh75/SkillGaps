@@ -1,6 +1,13 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../services/auth.context";
-import { register, verifyEmail, resendEmail, login , logout , getMe , deleteAccount, updateUserDetails ,updateUserPassword} from "../services/auth.api";
+
+import { register, verifyEmail, resendEmail, login ,
+     logout , getMe , deleteAccount, updateUserDetails
+      ,updateUserPassword ,resendOTP ,verifyOTP , 
+      verifyEmailForOTP ,updatePassword} 
+      from "../services/auth.api";
+
+
 import { useNavigate } from "react-router-dom";
 
 export  const useAuth = ()=>{
@@ -102,14 +109,11 @@ export  const useAuth = ()=>{
         try {
             const data = await logout()
             setUser(null)
-
         } catch (err) {
             throw Error("in useAuth logout api give error")
         } finally{
             setLoading(false)
-        }
-        
-       
+        }       
     }
 
     const handleUpdateUserDetails = async (updatDetails)=>{
@@ -175,11 +179,103 @@ export  const useAuth = ()=>{
         }
     }
 
+    // =====================
+    // for reset password
+    // =====================
+
+    const handleVerifyEmailForOTP = async (email) => {
+
+        setLoading(true)
+
+        try {
+            const data = await verifyEmailForOTP(email);
+
+            return data
+            
+        } catch (error) {
+            alert(
+                error.response?.data?.message || "Something went wrong"
+            );
+        } finally{
+            setLoading(false)
+        }
+
+    }
 
 
+    const handleVerifyOTPAuth = async (email , otp) => {
 
-    return {user, loading , handleLogin ,handleRegister ,handleVerifyEmail, handleResendEmail ,handleLogout ,
-        handleUpdateUserDetails,handleUpdateUserPassword, handleDeleteUserAccount }
+        setLoading(true)
+
+        try {
+            const data = await verifyOTP(email , otp);
+
+            return data
+            
+        } catch (error) {
+            alert(
+                error.response?.data?.message || "Something went wrong"
+            );
+        } finally{
+            setLoading(false)
+        }
+
+    }
+
+
+    const handleResendOTP = async (email) => {
+
+        setLoading(true)
+
+        try {
+            const data = await resendOTP(email);
+
+            return data
+            
+        } catch (error) {
+            alert(
+                error.response?.data?.message || "Something went wrong"
+            );
+        } finally{
+            setLoading(false)
+        }
+
+    }
+
+
+    const handleUpdatePassword = async (resetToken , email , newPassword) => {
+
+        setLoading(true)
+
+        try {
+            const data = await updatePassword( resetToken ,email , newPassword);
+
+            return data
+            
+        } catch (error) {
+
+            alert(
+                error.response?.data?.message || "Something went wrong"
+            );
+        } finally{
+
+            setLoading(false)
+        }
+
+    }
+
+
+    return {user, loading , handleLogin ,
+        handleRegister ,handleVerifyEmail, 
+        handleResendEmail ,handleLogout ,
+        handleUpdateUserDetails,
+        handleUpdateUserPassword, 
+        handleDeleteUserAccount,
+        handleVerifyEmailForOTP,
+        handleVerifyOTPAuth,
+        handleResendOTP,
+        handleUpdatePassword
+    }
 }
 
 

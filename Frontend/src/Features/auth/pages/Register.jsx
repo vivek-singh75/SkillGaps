@@ -327,8 +327,7 @@ const Register = () => {
     // CLEAN EMAIL
     // =====================================
 
-    const cleanEmail =
-      resendEmail.trim();
+    const cleanEmail = resendEmail.trim();
 
 
     // =====================================

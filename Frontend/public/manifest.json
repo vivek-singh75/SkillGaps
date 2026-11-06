@@ -1,14 +1,14 @@
 {
   "name": "SkillGaps",
   "short_name": "SkillGaps",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#050B24",
   "theme_color": "#050B24",
   "icons": [
     {
-      "src": "./SkillGaps-favicon.png",
+      "src": "/SkillGaps-fevicon.png",
       "sizes": "1024x1024",
       "type": "image/png"
     }
