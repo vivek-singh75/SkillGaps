@@ -55,6 +55,39 @@ async function sendVerificationEmail(email, token) {
     });
 }
 
+
+async function sendOTP(userEmail, otp) {
+    await brevo.transactionalEmails.sendTransacEmail({
+        sender: {
+            email: process.env.EMAIL_FROM,
+            name: "SkillGaps"
+        },
+
+        to: [{
+            email: userEmail
+        }],
+
+        subject: "Reset Password OTP",
+
+        htmlContent: `
+        <html>
+        <body style="font-family: Arial; color: #333;">
+            <h2>SkillGaps - Password Reset</h2>
+            <p>Your OTP for resetting your password is:</p>
+            <h1 style="color: #2563eb; letter-spacing: 5px;">${otp}</h1>
+            <p>This OTP is valid for 5 minutes.</p>
+            <p>Do not share this OTP with anyone.</p>
+            <p>If you didn't request this, ignore this email.</p>
+            <p>Regards,<br>Team SkillGaps</p>
+        </body>
+        </html>
+        `
+    });
+}
+
+
+
 module.exports = {
-    sendVerificationEmail
+    sendVerificationEmail,
+    sendOTP
 };
