@@ -16,6 +16,7 @@ app.use(cookieParser());
 const allowedOrigins = [
     "http://localhost:5173",
     "https://skillgaps-17320.web.app",
+    "https://skillgaps-17320.firebaseapp.com/",
     "https://vivek-singh75.github.io"
 ];
 
